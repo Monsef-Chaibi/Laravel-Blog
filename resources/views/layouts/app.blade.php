@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>
-        @if (url()->current() == 'http://localhost:8000/')
-            {{ env('APP_NAME') }} | {{ $pageTitle }}
+        @if (url()->current() == 'http://localhost:8000')
+            Projet_stage | {{ $pageTitle }}
         @else
-            {{ env('APP_NAME') }} | @yield('title')
+            Projet_stage | @yield('title')
         @endif
     </title>
 
@@ -37,8 +37,13 @@
         @include('layouts.partials.frontend.sidebar')
         <!-- SideBar -->
     </header>
+    @if (Session::has('message'))
+        <div class="alert alert-success" role="alert">
+            {{ Session::get('message') }}
+        </div>
+    @endif
     <!--Main Navigation-->
-    <div class="container min-vh-100">
+    <div class="container">
         @yield('content')
     </div>
 </body>

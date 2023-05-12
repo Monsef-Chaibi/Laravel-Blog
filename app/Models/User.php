@@ -23,6 +23,7 @@ class User extends Authenticatable
         'username',
         'join_date',
         'password',
+        'is_email_verified'
     ];
 
     /**

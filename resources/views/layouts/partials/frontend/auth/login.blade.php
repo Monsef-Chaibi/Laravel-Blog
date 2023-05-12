@@ -16,6 +16,11 @@
                         {{ Session::get('message') }}
                     </div>
                 @endif
+                @if (Session::has('warning'))
+                    <div class="alert alert-warning" role="alert">
+                        {{ Session::get('message') }}
+                    </div>
+                @endif
 
                 @include('layouts.partials.frontend.auth.messages')
 
@@ -45,7 +50,7 @@
                         <!-- Checkbox -->
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="" name="remember"
-                                id="form1Example3" />
+                                id="form1Example3" {{ old('remember') ? 'checked' : '' }} />
                             <label class="form-check-label" for="form1Example3">
                                 Remember me
                             </label>

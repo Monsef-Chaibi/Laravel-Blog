@@ -37,8 +37,9 @@
         @include('layouts.partials.frontend.sidebar')
         <!-- SideBar -->
     </header>
+    
     <!--Main Navigation-->
-    <div class="container min-vh-100">
+    <div class="container">
         @yield('content')
     </div>
 </body>

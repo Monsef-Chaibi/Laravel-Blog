@@ -8,6 +8,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\UserVerifyController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,10 +43,6 @@ Route::group(['middleware' => ['guest']], function () {
      */
     Route::get('/login', [LoginController::class, 'show'])->name('login.show');
     Route::post('/login', [LoginController::class, 'login'])->name('login.perform');
-
-    /**
-     * Login Routes
-     */
 });
 
 /**
@@ -55,6 +52,13 @@ Route::get('forget-password', [ForgotPasswordController::class, 'showForgetPassw
 Route::post('forget-password', [ForgotPasswordController::class, 'submitForgetPasswordForm'])->name('forget.password.post');
 Route::get('reset-password/{token}', [ForgotPasswordController::class, 'showResetPasswordForm'])->name('reset.password.get');
 Route::post('reset-password', [ForgotPasswordController::class, 'submitResetPasswordForm'])->name('reset.password.post');
+
+/**
+ * Verified User Routes
+ */
+Route::get('/', [HomeController::class, 'index'])->middleware(['auth', 'is_verify_email']); 
+Route::get('account/verify/{token}', [UserVerifyController::class, 'verifyAccount'])->name('user.verify'); 
+
 
 Route::group(['middleware' => ['auth']], function () {
     /**

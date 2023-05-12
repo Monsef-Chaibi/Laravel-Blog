@@ -37,7 +37,8 @@ class LoginController extends Controller
 
         $user = Auth::getProvider()->retrieveByCredentials($credentials);
 
-        Auth::login($user);
+        auth()->login($user);
+        redirect(200)->with('success', 'Great! You log in Successfully!');
 
         return $this->authenticated($request, $user);
     }
