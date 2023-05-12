@@ -4,7 +4,13 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ env('APP_NAME') }} | @yield('title')</title>
+    <title>
+        @if (url()->current() == 'http://localhost:8000')
+            {{ env('APP_NAME') }} | {{ $pageTitle }}
+        @else
+            Projet_stage | @yield('title')
+        @endif
+    </title>
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ asset('assets/admin/plugins/fontawesome-free/css/all.min.css') }}">

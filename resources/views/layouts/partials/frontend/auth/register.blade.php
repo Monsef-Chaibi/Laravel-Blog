@@ -8,7 +8,7 @@
             <form class="bg-white rounded-5 shadow-5-strong p-5" method="POST" action="{{ route('register.perform') }}"
                 required autofocus>
                 @csrf
-                <div class="forr-group mb-4">
+                <div class="form-group mb-4">
                     <p class="mb-3 fw-bold text-center fs-3 text-warning" style="letter-spacing: 3px">Register</p>
                     <p class="fw-bold fs-4 text-center">Sign Up Free Account</p>
                 </div>
@@ -40,21 +40,11 @@
                     <label class="form-label" for="form1Example2">Password</label>
                 </div>
 
-                <!-- 2 column grid layout for inline styling -->
+                <!-- 1 column grid layout for inline styling -->
                 <div class="row mb-4">
-                    <div class="col d-flex justify-content-center">
-                        <!-- Checkbox -->
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="form1Example3" />
-                            <label class="form-check-label" for="form1Example3">
-                                Remember me
-                            </label>
-                        </div>
-                    </div>
-
                     <div class="col text-center">
                         <!-- Simple link -->
-                        <a href="#!">Forgot password?</a>
+                        <a href="{{ route('login.show') }}">Already Have Account?</a>
                     </div>
                 </div>
 

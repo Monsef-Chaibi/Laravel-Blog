@@ -5,9 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    {{-- <title>{{ env('APP_NAME') }} | @yield('title') </title> --}}
     <title>
-        @if (url()->current() == 'http://localhost:8000')
+        @if (url()->current() == 'http://localhost:8000/')
             {{ env('APP_NAME') }} | {{ $pageTitle }}
         @else
             {{ env('APP_NAME') }} | @yield('title')

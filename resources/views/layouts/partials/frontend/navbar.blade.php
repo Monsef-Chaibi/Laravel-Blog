@@ -97,8 +97,11 @@
                         id="navbarDropdownMenuAvatar" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
                         <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle" height="25"
                             alt="Black and White Portrait of a Man" loading="lazy" />
-                    </a>{{ auth()->user()->name }}
+                    </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
+                        <li>
+                            <a class="dropdown-item" href="#" aria-disabled="true">{{ auth()->user()->username }}</a>
+                        </li>
                         <li>
                             <a class="dropdown-item" href="#">My profile</a>
                         </li>

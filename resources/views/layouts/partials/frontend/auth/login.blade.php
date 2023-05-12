@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.auth-master')
 
 @section('title', 'login')
 
@@ -11,13 +11,18 @@
                     <p class="mb-3 fw-bold text-center text-warning" style="letter-spacing: 3px">WELCOME BACK</p>
                     <p class="fw-bold fs-4 text-center">Sign In to Your Account</p>
                 </div>
+                @if (Session::has('message'))
+                    <div class="alert alert-success" role="alert">
+                        {{ Session::get('message') }}
+                    </div>
+                @endif
 
                 @include('layouts.partials.frontend.auth.messages')
 
                 <!-- Email input -->
                 <div class="form-outline mb-4">
-                    <input type="text" id="form1Example1" class="form-control" name="username" value="{{ old('username') }}"
-                        required autofocus />
+                    <input type="text" id="form1Example1" class="form-control" name="username"
+                        value="{{ old('username') }}" required autofocus />
                     <label class="form-label" for="form1Example1">Email or Username</label>
                     @if ($errors->has('username'))
                         <span class="text-danger text-left">{{ $errors->first('username') }}</span>
@@ -39,7 +44,8 @@
                     <div class="col d-flex justify-content-center">
                         <!-- Checkbox -->
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="form1Example3" />
+                            <input class="form-check-input" type="checkbox" value="" name="remember"
+                                id="form1Example3" />
                             <label class="form-check-label" for="form1Example3">
                                 Remember me
                             </label>
@@ -48,12 +54,13 @@
 
                     <div class="col text-center">
                         <!-- Simple link -->
-                        <a href="#!">Forgot password?</a>
+                        <a href="{{ route('forget.password.get') }}">Forgot password?</a>
                     </div>
                 </div>
 
                 <!-- Submit button -->
-                <button type="submit" class="btn btn-primary btn-block">Sign in <i class="fa-solid fa-right-to-bracket"></i></button>
+                <button type="submit" class="btn btn-primary btn-block">Sign in <i
+                        class="fa-right-to-bracket"></i></button>
                 @include('layouts.partials.frontend.auth.copy')
             </form>
         </div>
