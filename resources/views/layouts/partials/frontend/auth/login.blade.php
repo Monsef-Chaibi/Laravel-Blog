@@ -27,7 +27,7 @@
                 <!-- Email input -->
                 <div class="form-outline mb-4">
                     <input type="text" id="form1Example1" class="form-control" name="username"
-                        value="{{ old('username') }}" required autofocus />
+                        @if (Cookie::has('username')) value="{{ Cookie::get('username') }}" @endif required autofocus />
                     <label class="form-label" for="form1Example1">Email or Username</label>
                     @if ($errors->has('username'))
                         <span class="text-danger text-left">{{ $errors->first('username') }}</span>
@@ -37,7 +37,7 @@
                 <!-- Password input -->
                 <div class="form-outline mb-4">
                     <input type="password" id="form1Example2" class="form-control" name="password"
-                        value="{{ old('password') }}" required />
+                        @if (Cookie::has('password')) value="{{ Cookie::get('password') }}" @endif required />
                     <label class="form-label" for="form1Example2">Password</label>
                     @if ($errors->has('password'))
                         <span class="text-danger text-left">{{ $errors->first('password') }}</span>
@@ -49,9 +49,9 @@
                     <div class="col d-flex justify-content-center">
                         <!-- Checkbox -->
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" name="remember"
-                                id="form1Example3" {{ old('remember') ? 'checked' : '' }} />
-                            <label class="form-check-label" for="form1Example3">
+                            <input class="form-check-input" type="checkbox" @if (Cookie::has('username')) checked @endif
+                                name="remember" id="remember" />
+                            <label class="form-check-label" for="remember">
                                 Remember me
                             </label>
                         </div>
