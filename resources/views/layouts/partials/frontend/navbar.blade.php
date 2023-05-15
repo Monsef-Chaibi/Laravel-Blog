@@ -51,7 +51,7 @@
         </div>
         <!-- Collapsible wrapper -->
         <!-- Search Box -->
-        <form class="d-flex input-group w-auto">
+        <form class="d-flex input-group w-auto search-box">
             <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
                 aria-describedby="search-addon" />
             <span class="input-group-text border-0" id="search-addon">
@@ -59,7 +59,7 @@
             </span>
         </form>
         <!-- Right elements -->
-        <div class="d-flex align-items-center me-4">
+        <div class="d-flex align-items-center me-4 right-elements">
             <!-- Icon -->
             @guest
                 <a href="{{ route('login.perform') }}" class="btn btn-success btn-rounded me-2">Login</a>
@@ -72,7 +72,7 @@
                 <!-- Notifications -->
                 <div class="dropdown">
                     <a class="text-reset me-3 dropdown-toggle hidden-arrow" href="#" id="navbarDropdownMenuLink"
-                        role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+                        role="button" aria-expanded="false">
                         <i class="fas fa-bell"></i>
                         <span class="badge rounded-pill badge-notification bg-danger">1</span>
                     </a>
@@ -116,11 +116,13 @@
                     </ul>
                 </div>
             @endauth
-            <!-- Toggle button Sidebar -->
-            <button id="toggler" class="btn btn-info btn-sm mx-4 ripple-surface" data-bs-toggle="offcanvas"
-                data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
-                <i class="fas fa-align-left"></i>
-            </button>
+            @auth
+                <!-- Toggle button Sidebar -->
+                <button id="toggler" class="btn btn-info btn-sm mx-4 ripple-surface" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+                    <i class="fas fa-align-left"></i>
+                </button>
+            @endauth
         </div>
         <!-- Right elements -->
     </div>

@@ -26,6 +26,6 @@ class UserVerifyController extends Controller
             }
         }
 
-        return redirect()->route('login.show')->with('message', $message);
+        return redirect()->route('login')->with('message', $message);
     }
 }

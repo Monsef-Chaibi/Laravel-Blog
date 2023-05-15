@@ -4,12 +4,12 @@
 
 @section('content')
     <div class="row justify-content-center align-items-center">
-        <div class="col-xl-5 col-md-8 m-5">
-            <form class="bg-white rounded-5 shadow-5-strong p-5" method="POST" action="{{ route('register.perform') }}"
+        <div class="col-xl-5 col-md-8 m-3">
+            <form class="bg-white rounded-5 shadow-5-strong px-5 py-4" method="POST" action="{{ route('register.perform') }}"
                 required autofocus>
                 @csrf
                 <div class="form-group mb-4">
-                    <p class="mb-3 fw-bold text-center fs-3 text-warning" style="letter-spacing: 3px">Register</p>
+                    <p class="m-3 mb-0 fw-bold text-center fs-3 text-warning" style="letter-spacing: 3px">Register</p>
                     <p class="fw-bold fs-4 text-center">Sign Up Free Account</p>
                 </div>
 
@@ -44,7 +44,7 @@
                 <div class="row mb-4">
                     <div class="col text-center">
                         <!-- Simple link -->
-                        <a href="{{ route('login.show') }}">Already Have Account?</a>
+                        <a href="{{ route('login') }}">Already Have Account?</a>
                     </div>
                 </div>
 

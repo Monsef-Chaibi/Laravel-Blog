@@ -7,8 +7,11 @@
         <div class="col-xl-5 col-md-8 m-5">
             <form class="bg-white rounded-5 shadow-5-strong p-5" method="POST" action="{{ route('login.perform') }}">
                 @csrf
-                <div class="forr-group mb-4">
+                <div class="form-group mb-4">
                     <p class="mb-3 fw-bold text-center text-warning" style="letter-spacing: 3px">WELCOME BACK</p>
+                    <div class="col-md-12 text-center mb-2" id="avatar">
+                        @include('layouts.partials.frontend.auth.avatar')
+                    </div>
                     <p class="fw-bold fs-4 text-center">Sign In to Your Account</p>
                 </div>
                 @if (Session::has('message'))
@@ -49,8 +52,9 @@
                     <div class="col d-flex justify-content-center">
                         <!-- Checkbox -->
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" @if (Cookie::has('username')) checked @endif
-                                name="remember" id="remember" />
+                            <input class="form-check-input" type="checkbox"
+                                @if (Cookie::has('username')) checked @else {{ '' }} @endif name="remember"
+                                id="remember" />
                             <label class="form-check-label" for="remember">
                                 Remember me
                             </label>

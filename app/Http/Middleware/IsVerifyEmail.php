@@ -20,7 +20,7 @@ class IsVerifyEmail
     {
         if (Auth::check() && !Auth::user()->is_email_verified) {
             auth()->logout();
-            return redirect()->route('login.show')
+            return redirect()->route('login')
                     ->with('message', 'You need to confirm your account. We have sent you an activation code, please check your email.');
           }
    

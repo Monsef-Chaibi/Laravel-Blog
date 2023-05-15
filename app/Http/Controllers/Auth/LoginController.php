@@ -44,10 +44,15 @@ class LoginController extends Controller
 
         // Remember User Email & Password with cookies
         auth()->login($user, $request->get('remember')); // Remember the user instance
-        if ($request->has('remember')) :
-            Cookie::queue('email', $request->email, 1440);
+        if ($request->has('remember')){
+            Cookie::queue('username', $request->username, 1440);
             Cookie::queue('password', $request->password, 1440);
-        endif;
+        } else {
+            Cookie::expire("username");
+            Cookie::expire("email");
+            Cookie::expire("password");
+        }
+        
 
         redirect(200)->with('success', 'Great! You log in Successfully!');
 

@@ -3,5 +3,29 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Nunito', sans-serif !important; 
+    font-family: 'Nunito', sans-serif !important;
+    overflow: hidden;
 }
+
+.dropdown:hover > .dropdown-menu {
+    display: block;
+    margin-top: 0;
+}
+
+div.navbar-collapse > * {
+    margin-left: 2rem;
+}
+
+@media screen and (max-width: 530px) {
+    .search-box {
+      background-color: rgb(196, 204, 196) !important; 
+      max-width: 200px !important;
+      border-radius: 6px;
+      margin: auto;
+    }
+    .right-elements {
+        margin: 0;
+        padding: 0;
+    }
+}
+
