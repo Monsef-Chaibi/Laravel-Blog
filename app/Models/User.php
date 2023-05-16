@@ -21,8 +21,13 @@ class User extends Authenticatable
         'name',
         'email',
         'username',
+        'bio',
+        'picture',
+        'country',
+        'state',
         'join_date',
         'password',
+        'blocked',
         'is_email_verified'
     ];
 

@@ -23,8 +23,7 @@
                 </li>
                 <!-- Navbar dropdown -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                        data-mdb-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" aria-expanded="false">
                         Dropdown
                     </a>
                     <!-- Dropdown menu -->
@@ -94,8 +93,8 @@
             @auth
                 <div class="dropdown">
                     <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#"
-                        id="navbarDropdownMenuAvatar" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-                        <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle" height="25"
+                        id="navbarDropdownMenuAvatar" role="button" aria-expanded="false">
+                        <img src="{{ asset(Auth::user()->picture) }}" class="rounded-circle" height="25"
                             alt="Black and White Portrait of a Man" loading="lazy" />
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
@@ -103,7 +102,7 @@
                             <a class="dropdown-item" href="#" aria-disabled="true">{{ auth()->user()->username }}</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="#">My profile</a>
+                            <a class="dropdown-item" href="{{ route("author.profile") }}">My profile</a>
                         </li>
                         <li>
                             <a class="dropdown-item" href="#">Settings</a>

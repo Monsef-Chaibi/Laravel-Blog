@@ -90,6 +90,7 @@
         <!-- /.control-sidebar -->
     </div>
     <!-- ./wrapper -->
+    @livewireScripts
 </body>
 
 <!-- jQuery -->

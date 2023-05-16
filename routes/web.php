@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Auth\Author\AuthorController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\LoginController;
@@ -52,20 +53,23 @@ Route::get('forget-password', [ForgotPasswordController::class, 'showForgetPassw
 Route::post('forget-password', [ForgotPasswordController::class, 'submitForgetPasswordForm'])->name('forget.password.post');
 Route::get('reset-password/{token}', [ForgotPasswordController::class, 'showResetPasswordForm'])->name('reset.password.get');
 Route::post('reset-password', [ForgotPasswordController::class, 'submitResetPasswordForm'])->name('reset.password.post');
+Route::get('account/verify/{token}', [UserVerifyController::class, 'verifyAccount'])->name('user.verify'); 
 
 /**
  * Verified User Routes
  */
-Route::get('/', [HomeController::class, 'index'])->middleware(['auth', 'is_verify_email']); 
-Route::get('account/verify/{token}', [UserVerifyController::class, 'verifyAccount'])->name('user.verify'); 
-
-
-Route::group(['middleware' => ['auth']], function () {
+Route::middleware(['auth', 'is_verify_email'])->group(function() {
+    Route::get('/', [HomeController::class, 'index']);
     /**
      * Logout Routes
      */
     Route::get('/logout', [LogoutController::class, 'perform'])->name('logout.perform');
-});
+    Route::prefix('author')->controller(AuthorController::class)->name('author.')->group(function() {
+        Route::get('/profile', "index")->name("profile");
+        Route::post('/profile', "update")->name("profile.update");
+    });
+}); 
+
 
 /*
 |--------------------------------------------------------------------------
@@ -73,6 +77,6 @@ Route::group(['middleware' => ['auth']], function () {
 |--------------------------------------------------------------------------
 */
 
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->middleware(['auth', 'is_verify_email'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index']);
 });
