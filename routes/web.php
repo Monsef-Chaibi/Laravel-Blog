@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Auth\Author\AuthorController;
+use App\Http\Controllers\Auth\Author\GeneralSettingsController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\LoginController;
@@ -29,8 +30,6 @@ use Illuminate\Support\Facades\Route;
 | guest routes
 |--------------------------------------------------------------------------
 */
-
-Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
 Route::group(['middleware' => ['guest']], function () {
     /**
@@ -58,15 +57,18 @@ Route::get('account/verify/{token}', [UserVerifyController::class, 'verifyAccoun
 /**
  * Verified User Routes
  */
-Route::middleware(['auth', 'is_verify_email'])->group(function() {
-    Route::get('/', [HomeController::class, 'index']);
+Route::middleware(['auth', 'is_verify_email'])->group(function() { 
+    Route::get('/', [HomeController::class, 'index'])->name('home');
     /**
      * Logout Routes
      */
     Route::get('/logout', [LogoutController::class, 'perform'])->name('logout.perform');
-    Route::prefix('author')->controller(AuthorController::class)->name('author.')->group(function() {
-        Route::get('/profile', "index")->name("profile");
-        Route::post('/profile', "update")->name("profile.update");
+    Route::prefix('author')->name('author.')->group(function() {
+        Route::get('/profile', [AuthorController::class ,"index"])->name("profile");
+        Route::post('/profile', [AuthorController::class ,"update"])->name("profile.update");
+        Route::get('/settings', [GeneralSettingsController::class, 'index'])->name("settings");
+        Route::post('/settings', [GeneralSettingsController::class, 'update'])->name("settings.update");
+        Route::post('/settings/logo', [GeneralSettingsController::class, 'changeBlogLogo'])->name("change-blog-logo");
     });
 }); 
 
@@ -77,6 +79,9 @@ Route::middleware(['auth', 'is_verify_email'])->group(function() {
 |--------------------------------------------------------------------------
 */
 
-Route::prefix('admin')->middleware(['auth', 'is_verify_email'])->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index']);
+Route::middleware(['auth', 'is_verify_email'])->group(function() {
+    Route::prefix('admin')->name('admin.')->group(function () {
+        Route::get('/dashboard', [DashboardController::class, 'index']);
+    });
 });
+

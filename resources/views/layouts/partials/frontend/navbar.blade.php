@@ -10,7 +10,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Navbar brand -->
             <a class="navbar-brand mt-2 mt-lg-0" href="#">
-                <img src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp" height="15"
+                <img src="{{ asset(\App\Models\Setting::get()->first()->blog_logo) }}" height="40"
                     alt="MDB Logo" loading="lazy" />
             </a>
             <!-- Left links -->
@@ -105,7 +105,7 @@
                             <a class="dropdown-item" href="{{ route("author.profile") }}">My profile</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="#">Settings</a>
+                            <a class="dropdown-item" href="{{ route('author.settings') }}">Settings</a>
                         </li>
                         @auth
                             <li>

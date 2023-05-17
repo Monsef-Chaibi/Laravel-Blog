@@ -79,3 +79,7 @@ div.navbar-collapse > * {
     display: flex;
     flex-direction: column;
 }
+
+.nav-link.active {
+    background-color: rgba(230, 221, 221, 0.55) !important;
+}

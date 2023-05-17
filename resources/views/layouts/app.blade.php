@@ -12,7 +12,10 @@
             Projet_stage | @yield('title')
         @endif
     </title>
-
+    <!-- Website logo -->
+    <link rel="blog_icon" sizes="180x180" href="{{ asset(\App\Models\Setting::get()->first()->blog_logo) }}">
+    <link rel="shortcut icon" href="{{ asset(\App\Models\Setting::get()->first()->blog_logo) }}">
+    <link rel="manifest" href="{{ asset(\App\Models\Setting::get()->first()->blog_logo) }}">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ asset('assets/admin/plugins/fontawesome-free/css/all.min.css') }}">
     <!-- Ionicons -->
@@ -47,6 +50,7 @@
     <div class="container">
         @yield('content')
     </div>
+    @livewireScripts
 </body>
 
 </html>
