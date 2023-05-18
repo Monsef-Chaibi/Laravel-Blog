@@ -26,7 +26,9 @@ class User extends Authenticatable
         'country',
         'state',
         'join_date',
+        'role',
         'password',
+        'direct_bulish',
         'blocked',
         'is_email_verified'
     ];

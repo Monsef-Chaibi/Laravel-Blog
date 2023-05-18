@@ -57,18 +57,20 @@ Route::get('account/verify/{token}', [UserVerifyController::class, 'verifyAccoun
 /**
  * Verified User Routes
  */
-Route::middleware(['auth', 'is_verify_email'])->group(function() { 
+Route::middleware(['auth'])->group(function() { 
     Route::get('/', [HomeController::class, 'index'])->name('home');
     /**
      * Logout Routes
      */
     Route::get('/logout', [LogoutController::class, 'perform'])->name('logout.perform');
+
     Route::prefix('author')->name('author.')->group(function() {
         Route::get('/profile', [AuthorController::class ,"index"])->name("profile");
         Route::post('/profile', [AuthorController::class ,"update"])->name("profile.update");
         Route::get('/settings', [GeneralSettingsController::class, 'index'])->name("settings");
         Route::post('/settings', [GeneralSettingsController::class, 'update'])->name("settings.update");
         Route::post('/settings/logo', [GeneralSettingsController::class, 'changeBlogLogo'])->name("change-blog-logo");
+        Route::view('/authors', 'layouts.partials.frontend.pages.authors')->name('authors');
     });
 }); 
 
@@ -79,7 +81,7 @@ Route::middleware(['auth', 'is_verify_email'])->group(function() {
 |--------------------------------------------------------------------------
 */
 
-Route::middleware(['auth', 'is_verify_email'])->group(function() {
+Route::middleware(['auth'])->group(function() {
     Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index']);
     });

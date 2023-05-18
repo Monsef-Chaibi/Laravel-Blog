@@ -10,8 +10,8 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Navbar brand -->
             <a class="navbar-brand mt-2 mt-lg-0" href="#">
-                <img src="{{ asset(\App\Models\Setting::get()->first()->blog_logo) }}" height="40"
-                    alt="MDB Logo" loading="lazy" />
+                <img src="{{ asset(\App\Models\Setting::get()->first()->blog_logo) }}" height="40" alt="MDB Logo"
+                    loading="lazy" />
             </a>
             <!-- Left links -->
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -23,7 +23,8 @@
                 </li>
                 <!-- Navbar dropdown -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        aria-expanded="false">
                         Dropdown
                     </a>
                     <!-- Dropdown menu -->
@@ -45,6 +46,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Projects</a>
                 </li>
+                @if (Auth::check() && Auth::user()->role == 'admin')
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('author.authors') }}">Authors</a>
+                    </li>
+                @endif
             </ul>
             <!-- Left links -->
         </div>
@@ -102,7 +108,7 @@
                             <a class="dropdown-item" href="#" aria-disabled="true">{{ auth()->user()->username }}</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="{{ route("author.profile") }}">My profile</a>
+                            <a class="dropdown-item" href="{{ route('author.profile') }}">My profile</a>
                         </li>
                         <li>
                             <a class="dropdown-item" href="{{ route('author.settings') }}">Settings</a>
