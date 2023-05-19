@@ -12,7 +12,6 @@
             Projet_stage | @yield('title')
         @endif
     </title>
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
     <!-- Website logo -->
     <link rel="blog_icon" sizes="180x180" href="{{ asset(\App\Models\Setting::get()->first()->blog_logo) }}">
     <link rel="shortcut icon" href="{{ asset(\App\Models\Setting::get()->first()->blog_logo) }}">
@@ -51,17 +50,20 @@
     <div class="container">
         @yield('content')
     </div>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- jQuery -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
-    </script>
-    <script src="{{ asset('assets/admin/plugins/jquery/jquery.min.js') }}"></script>
-    <!-- AdminLTE App -->
-    <script src="{{ asset('assets/admin/dist/js/adminlte.js') }}"></script>
-    <!-- Bootstrap -->
-    @stack('scripts')
-    @livewireScripts
+
+
 </body>
+@livewireScripts
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- jQuery -->
+<script src="{{ asset('assets/admin/plugins/jquery/jquery.min.js') }}"></script>
+<!-- AdminLTE App -->
+<script src="{{ asset('assets/admin/dist/js/adminlte.min.js') }}"></script>
+<script src="{{ asset('assets/admin/dist/js/adminlte.js') }}"></script>
+<!-- Bootstrap -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
+</script>
+@stack('scripts')
 
 </html>

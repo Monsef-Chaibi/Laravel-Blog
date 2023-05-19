@@ -44,7 +44,7 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Projects</a>
+                    <a class="nav-link" href="{{ route('author.categories') }}">Menus & Categories</a>
                 </li>
                 @if (Auth::check() && Auth::user()->role == 'admin')
                     <li class="nav-item">

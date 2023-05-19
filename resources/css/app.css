@@ -146,3 +146,7 @@ h4 {
     padding: 10px;
     box-shadow: 4px 4px #00A4BD, 8px 8px #FF7A59, 12px 12px #334758;
 }
+
+.card-header.align-items-center::after {
+    content: none;
+}

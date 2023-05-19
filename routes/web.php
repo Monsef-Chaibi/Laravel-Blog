@@ -71,6 +71,7 @@ Route::middleware(['auth'])->group(function() {
         Route::post('/settings', [GeneralSettingsController::class, 'update'])->name("settings.update");
         Route::post('/settings/logo', [GeneralSettingsController::class, 'changeBlogLogo'])->name("change-blog-logo");
         Route::view('/authors', 'layouts.partials.frontend.pages.authors')->name('authors');
+        Route::view('/categories', 'layouts.partials.frontend.pages.categories')->name('categories');
     });
 }); 
 
