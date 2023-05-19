@@ -88,7 +88,7 @@
                                                     @endif
                                                 </p>
                                             </td>
-                                            <td></td>
+                                            <td>{{ $subcategory->posts->count() }}</td>
                                             <td>
                                                 <a href="#"
                                                     wire:click.prevent="editSubCategory({{ $subcategory->id }})"
@@ -142,7 +142,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" wire:click.prevent="resetInputForm">Close</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                            wire:click.prevent="resetInputForm">Close</button>
                         <button type="submit"
                             class="btn btn-primary">{{ $updateCategoryMode ? 'Update' : 'Save' }}</button>
                     </div>
@@ -191,7 +192,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary me-auto" data-bs-dismiss="modal" wire:click.prevent="resetInputForm">Close</button>
+                    <button type="button" class="btn btn-secondary me-auto" data-bs-dismiss="modal"
+                        wire:click.prevent="resetInputForm">Close</button>
                     <button type="submit"
                         class="btn btn-primary">{{ $updateSubCategoryMode ? 'Update' : 'Save' }}</button>
                 </div>
@@ -201,9 +203,14 @@
 </div>
 @push('scripts')
     <script>
-        window.addEventListener('hideCategoryModal', (event) => {
-            $('#categories_modal').modal('hide')
-        })
+        $(document).ready(function() {
+            $(window).on('hideCategoryModal', function(event) {
+                $('#categories_modal').modal('hide');
+            });
+        });
+        // window.addEventListener('hideCategoryModal', (event) => {
+        //     $('#categories_modal').modal('hide')
+        // })
         window.addEventListener('hideSubCategoryModal', (event) => {
             $('#subcategories_modal').modal('hide')
         })

@@ -31,4 +31,14 @@ class SubCategory extends Model
     {
         return $this->belongsTo(Category::class, 'parent_category', 'id');
     }
+
+    /**
+     * Get all of the posts for the SubCategory
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function posts()
+    {
+        return $this->hasMany(Post::class, 'category_id', 'id');
+    }
 }

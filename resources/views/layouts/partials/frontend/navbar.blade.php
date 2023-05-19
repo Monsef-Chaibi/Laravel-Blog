@@ -25,15 +25,15 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         aria-expanded="false">
-                        Dropdown
+                        Posts
                     </a>
                     <!-- Dropdown menu -->
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li>
-                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="{{ route('author.posts.add-post') }}">Add new Post</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="#">All Posts</a>
                         </li>
                         <li>
                             <hr class="dropdown-divider" />
