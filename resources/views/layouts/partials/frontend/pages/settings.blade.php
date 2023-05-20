@@ -68,7 +68,7 @@
                             <div class="col-md-6">
                                 <h3>Set Blog Logo</h3>
                                 <div class="mb-2" style="max-width: 200px;">
-                                    <img src="{{ asset($settings->blog_logo) }}" alt="{{ $settings->blog_logo }}" class="img-thumbnail"
+                                    <img src="{{ asset($settings->blog_logo) }}" alt="{{ $settings->blog_logo }}" id="img-logo" class="img-thumbnail"
                                         id="logo-image-preview ">
                                 </div>
                                 @error('blog_logo')
@@ -80,7 +80,7 @@
                                     enctype="multipart/form-data">
                                     @csrf
                                     <div class="mb-2">
-                                        <input class="form-control form-control mb-3" name="blog_logo" id="formFileSm"
+                                        <input class="form-control form-control mb-3" name="blog_logo" id="blog_logo"
                                             type="file" />
                                         <button class="btn btn-primary">Change Logo</button>
                                     </div>
@@ -97,3 +97,23 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            $('#blog_logo').change(function() {
+                readURL(this);
+            });
+
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        $('#img-logo').attr('src', e.target.result);
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+        });
+    </script>
+@endpush

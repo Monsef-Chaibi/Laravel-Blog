@@ -78,6 +78,9 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/add-post', [PostController::class, 'index'])->name('add-post');
             Route::post('/create', [PostController::class, 'createPost'])->name('create');
             Route::view('/all', 'layouts.partials.frontend.pages.all_posts')->name('all_posts');
+            Route::get('/edit-post', [PostController::class, 'editPost'])->name('edit-post');
+            Route::post('/update-post', [PostController::class, 'updatePost'])->name('update-post');
+            Route::put('/delete-post', [PostController::class, 'destroyPost'])->name('delete-post');
         });
     });
 });

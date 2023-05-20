@@ -54,13 +54,19 @@
         @forelse ($posts as $post)
             <div class="col-sm-12 col-md-6 col-lg-4">
                 <div class="card border border-dark-subtle">
-                    <img src="/storage/uploads/poststhumbnails/resized_{{ $post->featured_image }}" class="card-img-top"
-                        alt="...">
+                    <img src="/storage/uploads/posts/thumbnails/resized_{{ $post->featured_image }}"
+                        class="card-img-top" alt="{{ $post->featured_image }}">
                     <div class="card-body">
                         <h5 class="card-title fw-600 mb-2">{{ $post->post_title }}</h5>
-                        <p class="card-text fw-400 mb-2">{{ $post->post_content }}</p>
-                        <a href="#" class="btn btn-info">Edit</a>
-                        <a href="#" class="btn btn-danger">Delete</a>
+                        <p class="card-text fw-400 mb-2">{{ strip_tags(html_entity_decode($post->post_content)) }}</p>
+                        <a href="{{ route('author.posts.edit-post', ['post_id' => $post->id]) }}"
+                            class="btn btn-info">Edit</a>
+                        <form action="{{ route('author.posts.delete-post', ['post_id' => $post->id]) }}"
+                            class="d-inline-block" method="POST">
+                            @csrf
+                            @method('PUT')
+                            <button type="submit"  onclick="return confirm('Are you sure?')" class="btn btn-danger">Delete</button>
+                        </form>
                     </div>
                 </div>
             </div>

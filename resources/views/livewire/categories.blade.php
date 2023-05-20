@@ -38,7 +38,7 @@
                                                     class="btn btn-outline-success btn-sm btn-rounded fw-bold">
                                                     Edit
                                                 </a>
-                                                <button type="button"
+                                                <button type="button" wire:click.prevent="deleteCategory({{ $category->id }})"
                                                     class="btn btn-outline-danger btn-sm btn-rounded fw-bold">
                                                     Delete
                                                 </button>
@@ -46,7 +46,7 @@
                                         </tr>
                                     @empty
                                         <div class="alert alert-danger">
-                                            <p class="px-4">No Category Found.</p>
+                                            <p class="p-0 m-0">No Category Found.</p>
                                         </div>
                                     @endforelse
                                 </tbody>

@@ -12,6 +12,8 @@
             Projet_stage | @yield('title')
         @endif
     </title>
+    <!-- Swal Alert -->
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
     <!-- Website logo -->
     <link rel="blog_icon" sizes="180x180" href="{{ asset(\App\Models\Setting::get()->first()->blog_logo) }}">
     <link rel="shortcut icon" href="{{ asset(\App\Models\Setting::get()->first()->blog_logo) }}">
@@ -64,6 +66,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
 </script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
 @stack('scripts')
 
 </html>
