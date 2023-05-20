@@ -24,4 +24,12 @@ class Post extends Model
         'featured_image'
     ];
 
+    public function scopeSearch($query, $name)
+    {
+        $name = "%$name%";
+        return $query->where(function($query) use ($name) {
+            $query->where('post_title', "like", $name);
+        });
+    }
+
 }

@@ -16,7 +16,7 @@
             <!-- Left links -->
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Dashboard</a>
+                    <a class="nav-link" href="{{ route('admin.dashboard') }}">Dashboard</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Team</a>
@@ -33,7 +33,7 @@
                             <a class="dropdown-item" href="{{ route('author.posts.add-post') }}">Add new Post</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="#">All Posts</a>
+                            <a class="dropdown-item" href="{{ route('author.posts.all_posts') }}">All Posts</a>
                         </li>
                         <li>
                             <hr class="dropdown-divider" />
@@ -43,10 +43,10 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('author.categories') }}">Menus & Categories</a>
-                </li>
                 @if (Auth::check() && Auth::user()->role == 'admin')
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('author.categories') }}">Menus & Categories</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('author.authors') }}">Authors</a>
                     </li>
@@ -112,6 +112,9 @@
                         </li>
                         <li>
                             <a class="dropdown-item" href="{{ route('author.settings') }}">Settings</a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider" />
                         </li>
                         @auth
                             <li>

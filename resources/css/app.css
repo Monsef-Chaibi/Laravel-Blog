@@ -150,3 +150,7 @@ h4 {
 .card-header.align-items-center::after {
     content: none;
 }
+
+.search-input {
+    padding-right: 1rem !important;
+}

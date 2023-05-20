@@ -77,6 +77,7 @@ Route::middleware(['auth'])->group(function () {
         Route::prefix('posts')->name('posts.')->group(function () {
             Route::get('/add-post', [PostController::class, 'index'])->name('add-post');
             Route::post('/create', [PostController::class, 'createPost'])->name('create');
+            Route::view('/all', 'layouts.partials.frontend.pages.all_posts')->name('all_posts');
         });
     });
 });
@@ -90,6 +91,6 @@ Route::middleware(['auth'])->group(function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::prefix('admin')->name('admin.')->group(function () {
-        Route::get('/dashboard', [DashboardController::class, 'index']);
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     });
 });
