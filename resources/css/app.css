@@ -112,14 +112,12 @@ div.navbar-collapse>* {
 .thumb-lg {
     height: 88px;
     width: 88px;
-    border-radius: 50%;
 }
 
 .img-thumbnail {
-    padding: 50%;
     background-color: #fff;
     max-width: 100%;
-    box-shadow: 0 0 50px #ccc;  
+    box-shadow: 0 0 50px #ccc;
 }
 
 .text-pink {

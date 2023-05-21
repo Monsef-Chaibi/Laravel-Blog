@@ -27,7 +27,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <!-- Styles -->
-    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/ui-kit/css/mdb.min.css', 'resources/ui-kit/js/mdb.min.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link rel="stylesheet" href="{{ asset('assets/ui-kit/css/mdb.min.css') }}">
     @livewireStyles
 </head>
 
@@ -56,6 +57,7 @@
 
 </body>
 @livewireScripts
+<script src="{{ asset('assets/ui-kit/js/mdb.min.js') }}"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- jQuery -->
 <script src="{{ asset('assets/admin/plugins/jquery/jquery.min.js') }}"></script>
@@ -68,5 +70,4 @@
 </script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
 @stack('scripts')
-
 </html>

@@ -38,7 +38,8 @@
                                                     class="btn btn-outline-success btn-sm btn-rounded fw-bold">
                                                     Edit
                                                 </a>
-                                                <button type="button" wire:click.prevent="deleteCategory({{ $category->id }})"
+                                                <button type="button"
+                                                    wire:click.prevent="deleteCategory({{ $category->id }})"
                                                     class="btn btn-outline-danger btn-sm btn-rounded fw-bold">
                                                     Delete
                                                 </button>
@@ -96,7 +97,7 @@
                                                     class="btn btn-outline-success btn-sm btn-rounded fw-bold">
                                                     Edit
                                                 </a>
-                                                <a href="#"
+                                                <a href="#" wire:click.prevent="deleteSubCategory({{ $subcategory->id }})"
                                                     class="btn btn-outline-danger btn-sm btn-rounded fw-bold">
                                                     Delete
                                                 </a>
@@ -213,6 +214,44 @@
         // })
         window.addEventListener('hideSubCategoryModal', (event) => {
             $('#subcategories_modal').modal('hide')
+        })
+        window.addEventListener('deleteCategory', function(event) {
+            Swal.fire({
+                icon: 'error',
+                title: event.detail.title,
+                html: event.detail.html,
+                showCloseButton: true,
+                showCancelButton: true,
+                cancelButtonText:"Cancel",
+                confirmButtonText: "Yes, Delete?",
+                cancelButtonColor: "#d33",
+                confirmButtonColor: "#3085d6",
+                width: 400,
+                allowOutsideClick: false
+            }).then(function (result) {
+                if (result.value) {
+                    window.livewire.emit('deleteCategoryAction', event.detail.id)
+                }
+            })
+        });
+        window.addEventListener('deleteSubCategory', function(event) {
+            Swal.fire({
+                icon: 'error',
+                title: event.detail.title,
+                html: event.detail.html,
+                showCloseButton: true,
+                showCancelButton: true,
+                cancelButtonText:"Cancel",
+                confirmButtonText: "Yes, Delete?",
+                cancelButtonColor: "#d33",
+                confirmButtonColor: "#3085d6",
+                width: 400,
+                allowOutsideClick: false
+            }).then(function (result) {
+                if (result.value) {
+                    window.livewire.emit('deleteCategoryAction', event.detail.id)
+                }
+            })
         })
     </script>
 @endpush

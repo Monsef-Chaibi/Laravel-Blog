@@ -3,11 +3,9 @@
 namespace App\Http\Livewire;
 
 use App\Models\User;
-use App\Models\UserVerify;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Nette\Utils\Random;

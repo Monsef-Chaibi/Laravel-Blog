@@ -3,12 +3,18 @@
 namespace App\Http\Livewire;
 
 use App\Models\Category;
+use App\Models\Post;
 use App\Models\SubCategory;
 use Livewire\Component;
 use Illuminate\Support\Str;
 
 class Categories extends Component
 {
+    protected $listeners = [
+        "deleteCategoryAction",
+        "deleteSubCategoryAction"
+    ];
+
     public $category_name;
     public $selected_category_id;
     public $updateCategoryMode = false;
@@ -129,6 +135,55 @@ class Categories extends Component
             } else {
                 toastr()->error('Somthing Went Wrong..!');
             }
+        }
+    }
+
+    public function deleteCategory($id)
+    {
+        $category = Category::find($id);
+        $this->dispatchBrowserEvent("deleteCategory", [
+            'title'=> 'Are you sure?',
+            'html'=> 'You want to delete <b>'.$category->category_name.'</b> category.',
+            'id'=> $id,
+        ]);
+    }
+
+    public function deleteCategoryAction($id)
+    {
+        $category = Category::find($id)->first();
+        $subcategories = SubCategory::where('parent_category', $category->id)->whereHas('posts')->with('posts')->get();
+        if (!empty($subcategories) && count($subcategories) > 0) {
+            $totalPosts = 0;
+            foreach ($subcategories as $subcategory) {
+                $totalPosts += Post::where('category_id', $subcategory->id)->get()->count();
+            }
+            toastr()->warning('This category has ('.$totalPosts.') posts related to it, cannot be deleted.');
+        } else {
+            SubCategory::where('parent_category', $category->id)->delete();
+            $category->delete();
+            toastr()->success('Category has been successfully deleted.');
+        }
+    }
+
+    public function deleteSubCategory($id)
+    {
+        $subcategory = SubCategory::find($id);
+        $this->dispatchBrowserEvent("deleteSubCategory", [
+            'title'=> 'Are you sure?',
+            'html'=> 'You want to delete <b>'.$subcategory->category_name.'</b> category.',
+            'id'=> $id,
+        ]);
+    }
+
+    public function deleteSubCategoryAction($id)
+    {
+        $subcategory = SubCategory::find($id)->first();
+        $posts = Post::where('category_id', $subcategory->id)->get()->toArray();
+        if (!empty($posts) && count($posts) > 0) {
+            toastr()->warning('This subcategory has ('.count($posts).') posts related to it, cannot be deleted.');
+        } else {
+            $subcategory->delete();
+            toastr()->info('SubCategory has been successfully deleted.');
         }
     }
 

@@ -28,7 +28,7 @@
                             <div class="text-center card-box">
                                 <div class="member-card pt-2 pb-2">
                                     <div class="thumb-lg member-thumb mx-auto mb-4">
-                                        <img src="{{ asset($author->picture) }}" class="img-thumbnail rounded"
+                                        <img src="{{ asset($author->picture) }}" class="img-thumbnail"
                                             alt="profile-image" />
                                     </div>
                                     <div class="my-2">
@@ -76,8 +76,8 @@
                         </div>
                         <!-- end col -->
                     @empty
-                        <div class="alert alert-danger">
-                            <p>No Author Found</p>
+                        <div class="alert alert-danger m-0 pb-2"">
+                            <p>No Author(s) Found</p>
                         </div>
                     @endforelse
                 </div>
@@ -256,7 +256,7 @@
             </div>
         </div>
 
-        <!-- Modal -->
+        <!-- Delete Modal -->
         <div wire:ignore.self class="modal fade" id="delete_modal" tabindex="-1"
             aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-sm">
