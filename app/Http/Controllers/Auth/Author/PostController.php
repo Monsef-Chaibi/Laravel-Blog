@@ -59,6 +59,7 @@ class PostController extends Controller
                 $post->post_title = $request->post_title;
                 $post->post_slug = Str::slug($request->post_slug);
                 $post->post_content = $request->post_content;
+                $post->post_tags= $request->post_tags;
                 $post->featured_image = $new_filename;
                 $saved = $post->save();
                 if ($saved) {
@@ -143,6 +144,7 @@ class PostController extends Controller
                 $post->post_title = $request->post_title;
                 $post->post_slug = $request->post_slug;
                 $post->post_content = $request->post_content;
+                $post->post_tags= $request->post_tags;
                 $post->featured_image = $new_filename;
                 $saved = $post->save();
 
@@ -169,6 +171,7 @@ class PostController extends Controller
             $post->post_title = $request->post_title;
             $post->post_slug = $request->post_slug;
             $post->post_content = $request->post_content;
+            $post->post_tags= $request->post_tags;
             $saved = $post->save();
 
             if ($saved) {

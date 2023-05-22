@@ -67,6 +67,10 @@
                                             class="img-thumbnail" id="image_previewer" />
                                         <i class="fas fa-solid fa-upload fa-xl"></i>
                                     </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Post Tags</label>
+                                        <input type="text" class="form-control" name="post_tags" />
+                                    </div>
                                     <button type="submit" class="btn btn-info">Save Post</button>
                                 </div>
                             </div>
@@ -81,7 +85,10 @@
 @push('scripts')
     <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
     <script>
-        CKEDITOR.replace('post_content');
+        var post_content = CKEDITOR.instances.post_content;
+        if (post_content) {
+            post_content.destroy(true);
+        }
         $(document).ready(function() {
             $('#featured_image').change(function() {
                 readURL(this);

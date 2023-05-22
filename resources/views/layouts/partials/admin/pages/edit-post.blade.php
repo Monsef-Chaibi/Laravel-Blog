@@ -9,7 +9,8 @@
                 <h1 class="multiple-border">Edit Post</h1>
             </div>
             <div class="row">
-                <form action="{{ route('author.posts.update-post', ['post_id'=>Request('post_id')]) }}" method="POST" id="EditPostForm" enctype="multipart/form-data">
+                <form action="{{ route('author.posts.update-post', ['post_id' => Request('post_id')]) }}" method="POST"
+                    id="EditPostForm" enctype="multipart/form-data">
                     @csrf
                     <div class="card border border-dark-subtle">
                         <div class="card-body">
@@ -45,7 +46,8 @@
                                         <select class="form-select" name="post_category">
                                             <option value="">-- No selected --</option>
                                             @foreach ($subcategories as $subcategory)
-                                                <option class="py-2" value="{{ $subcategory->id }}" {{ $post->category_id == $subcategory->id ? "selected" : "" }}>
+                                                <option class="py-2" value="{{ $subcategory->id }}"
+                                                    {{ $post->category_id == $subcategory->id ? 'selected' : '' }}>
                                                     {{ $subcategory->subcategory_name }}
                                                 </option>
                                             @endforeach
@@ -63,9 +65,15 @@
                                         @enderror
                                     </div>
                                     <div class="image_holder mb-3 me-0 p-0">
-                                        <img src="/storage/uploads/posts/thumbnails/resized_{{ $post->featured_image }}" alt="Preview Image" style="width: 100%;" height="200px"
-                                            class="img-thumbnail" id="image_previewer" />
+                                        <img src="/storage/uploads/posts/thumbnails/resized_{{ $post->featured_image }}"
+                                            alt="Preview Image" style="width: 100%;" height="200px" class="img-thumbnail"
+                                            id="image_previewer" />
                                         <i class="fas fa-solid fa-upload fa-xl"></i>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Post Tags</label>
+                                        <input type="text" class="form-control" name="post_tags"
+                                            value="{{ $post->post_tags }}" />
                                     </div>
                                     <button type="submit" class="btn btn-info">Update Post</button>
                                 </div>
@@ -81,7 +89,10 @@
 @push('scripts')
     <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
     <script>
-        CKEDITOR.replace('post_content');
+        var post_content = CKEDITOR.instances.post_content;
+        if (post_content) {
+            post_content.destroy(true);
+        }
         $(document).ready(function() {
             $('#featured_image').change(function() {
                 readURL(this);

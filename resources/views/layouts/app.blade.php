@@ -32,6 +32,7 @@
     <link rel="stylesheet" href="{{ asset('jquery-ui-1.13.2/jquery-ui.min.css') }}">
     <link rel="stylesheet" href="{{ asset('jquery-ui-1.13.2/jquery-ui.structure.min.css') }}">
     <link rel="stylesheet" href="{{ asset('jquery-ui-1.13.2/jquery-ui.theme.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('amsify/amsify.suggestags.css') }}">
     @livewireStyles
 </head>
 
@@ -74,5 +75,9 @@
 </script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
 @stack('scripts')
+<script src="{{ asset('amsify/jquery.amsify.suggestags.js') }}"></script>
+<script>
+    $('input[name="post_tags"]').amsifySuggestags();
+</script>
 
 </html>
