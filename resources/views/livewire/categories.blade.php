@@ -21,9 +21,9 @@
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="sortable_category">
                                     @forelse ($categories as $category)
-                                        <tr>
+                                        <tr data-index="{{ $category->id }}" data-ordering="{{ $category->ordering }}">
                                             <td>
                                                 <div class="d-flex align-items-center">
                                                     {{ $category->category_name }}
@@ -74,9 +74,10 @@
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="sortable_subcategory">
                                     @forelse ($subcategories as $subcategory)
-                                        <tr>
+                                        <tr data-index="{{ $subcategory->id }}"
+                                            data-ordering="{{ $subcategory->ordering }}">
                                             <td>
                                                 <div class="d-flex align-items-center">
                                                     {{ $subcategory->subcategory_name }}
@@ -84,9 +85,7 @@
                                             </td>
                                             <td>
                                                 <p class="fw-normal mb-1">
-                                                    @if ($subcategory->parentCategory)
-                                                        {{ $subcategory->parentCategory->category_name }}
-                                                    @endif
+                                                    {{ $subcategory->parent_category != 0 ? $subcategory->parentCategory->category_name : ' Uncategorized ' }}
                                                 </p>
                                             </td>
                                             <td>{{ $subcategory->posts->count() }}</td>
@@ -97,7 +96,8 @@
                                                     class="btn btn-outline-success btn-sm btn-rounded fw-bold">
                                                     Edit
                                                 </a>
-                                                <a href="#" wire:click.prevent="deleteSubCategory({{ $subcategory->id }})"
+                                                <a href="#"
+                                                    wire:click.prevent="deleteSubCategory({{ $subcategory->id }})"
                                                     class="btn btn-outline-danger btn-sm btn-rounded fw-bold">
                                                     Delete
                                                 </a>
@@ -157,7 +157,8 @@
         data-bs-keyboard="false" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <form class="modal-content"
-                @if ($updateSubCategoryMode) wire:submit.prevent="updateSubCategory()" @else wire:submit.prevent="addSubCategory()" @endif>
+                @if ($updateSubCategoryMode) wire:submit.prevent="updateSubCategory()" @else wire:submit.prevent="addSubCategory()" @endif
+                method="POST">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalLabel">
                         {{ $updateSubCategoryMode ? 'Update SubCategory' : 'Add SubCategory' }}</h1>
@@ -170,9 +171,7 @@
                     <div class="mb-3">
                         <label class="form-label" for="inlineFormSelectPref">Parent Category</label>
                         <select class="form-select" wire:model="parent_category">
-                            @if (!$updateSubCategoryMode)
-                                <option value="">-- No selected --</option>
-                            @endif
+                            <option value="0">-- Uncategorized --</option>
                             @foreach ($categories as $category)
                                 <option value="{{ $category->id }}">
                                     {{ $category->category_name }}
@@ -222,13 +221,13 @@
                 html: event.detail.html,
                 showCloseButton: true,
                 showCancelButton: true,
-                cancelButtonText:"Cancel",
+                cancelButtonText: "Cancel",
                 confirmButtonText: "Yes, Delete?",
                 cancelButtonColor: "#d33",
                 confirmButtonColor: "#3085d6",
                 width: 400,
                 allowOutsideClick: false
-            }).then(function (result) {
+            }).then(function(result) {
                 if (result.value) {
                     window.livewire.emit('deleteCategoryAction', event.detail.id)
                 }
@@ -241,17 +240,51 @@
                 html: event.detail.html,
                 showCloseButton: true,
                 showCancelButton: true,
-                cancelButtonText:"Cancel",
+                cancelButtonText: "Cancel",
                 confirmButtonText: "Yes, Delete?",
                 cancelButtonColor: "#d33",
                 confirmButtonColor: "#3085d6",
                 width: 400,
                 allowOutsideClick: false
-            }).then(function (result) {
+            }).then(function(result) {
                 if (result.value) {
                     window.livewire.emit('deleteCategoryAction', event.detail.id)
                 }
             })
-        })
+        });
+
+        $('table tbody#sortable_category').sortable({
+            update: function(event, ui) {
+                $(this).children().each(function(index) {
+                    if ($(this).attr('data-ordering') != (index + 1)) {
+                        $(this).attr('data-ordering', (index + 1)).addClass('updated');
+                    }
+                });
+                var positions = [];
+                $(".updated").each(function() {
+                    positions.push([$(this).attr('data-index'), $(this).attr('data-ordering')]);
+                    $(this).removeClass('updated');
+                });
+
+                window.livewire.emit('updateCategoryOrdering', positions);
+            }
+        });
+
+        $('table tbody#sortable_subcategory').sortable({
+            update: function(event, ui) {
+                $(this).children().each(function(index) {
+                    if ($(this).attr('data-ordering') != (index + 1)) {
+                        $(this).attr('data-ordering', (index + 1)).addClass('updated');
+                    }
+                });
+                var positions = [];
+                $(".updated").each(function() {
+                    positions.push([$(this).attr('data-index'), $(this).attr('data-ordering')]);
+                    $(this).removeClass('updated');
+                });
+
+                window.livewire.emit('updateSubCategoryOrdering', positions);
+            }
+        });
     </script>
 @endpush

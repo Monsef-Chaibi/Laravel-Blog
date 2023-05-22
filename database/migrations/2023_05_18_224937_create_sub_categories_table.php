@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('subcategory_name')->nullable();
             $table->string('slug')->nullable();
             $table->string('parent_category')->nullable();
-            $table->string('ordering')->default(100000);
+            $table->integer('ordering')->default(100000);
             $table->timestamps();
         });
     }

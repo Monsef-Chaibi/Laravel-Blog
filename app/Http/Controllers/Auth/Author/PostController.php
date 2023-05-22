@@ -16,7 +16,7 @@ class PostController extends Controller
     public function index()
     {
         $subcategories = SubCategory::all();
-        return view('layouts.partials.frontend.pages.add-post', compact('subcategories'));
+        return view('layouts.partials.admin.pages.add-post', compact('subcategories'));
     }
 
     public function createPost(Request $request)
@@ -26,7 +26,7 @@ class PostController extends Controller
             'post_slug' => 'required|unique:posts,post_slug',
             'post_category' => 'required|exists:sub_categories,id',
             'post_content' => 'required',
-            'featured_image' => 'required|mimes:jpeg,jpg,png|max:2048',
+            'featured_image' => 'required|mimes:jpeg,jpg,png,webp|max:2048',
         ]);
 
         if ($request->hasFile('featured_image')) {
@@ -86,7 +86,7 @@ class PostController extends Controller
                 "post" => $post,
                 "pageTitle" => 'Edit Post',
             ];
-            return view('layouts.partials.frontend.pages.edit-post', $data, compact('subcategories'));
+            return view('layouts.partials.admin.pages.edit-post', $data, compact('subcategories'));
         }
     }
 

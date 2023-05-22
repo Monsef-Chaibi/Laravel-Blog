@@ -50,7 +50,7 @@
             </select>
         </div>
     </div>
-    <div class="row gap-3">
+    <div class="row">
         @forelse ($posts as $post)
             <div class="col-sm-12 col-md-6 col-lg-4">
                 <div class="card border border-dark-subtle">

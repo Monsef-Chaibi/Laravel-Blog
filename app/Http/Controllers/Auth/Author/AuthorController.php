@@ -13,7 +13,7 @@ class AuthorController extends Controller
 {
     public function index()
     {
-        return view('layouts.partials.frontend.pages.profile');
+        return view('layouts.partials.admin.pages.profile');
     }
 
     public function update(Request $request)

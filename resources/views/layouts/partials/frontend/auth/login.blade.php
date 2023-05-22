@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="row justify-content-center align-items-center">
-        <div class="col-xl-5 col-md-8 m-5">
+        <div class="col-xl-5 col-md-8 m-4">
             <form class="bg-white rounded-5 shadow-5-strong p-5" method="POST" action="{{ route('login.perform') }}">
                 @csrf
                 <div class="form-group mb-4">

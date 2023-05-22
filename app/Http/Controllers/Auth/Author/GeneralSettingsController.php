@@ -12,7 +12,7 @@ class GeneralSettingsController extends Controller
     public function index()
     {
         $settings = Setting::get()->first();
-        return view('layouts.partials.frontend.pages.settings', compact('settings'));
+        return view('layouts.partials.admin.pages.settings', compact('settings'));
     }
 
     public function update(Request $request)

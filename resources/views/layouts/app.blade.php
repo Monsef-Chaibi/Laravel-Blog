@@ -7,17 +7,17 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>
         @if (url()->current() == 'http://localhost:8000')
-            Projet_stage | {{ $pageTitle }}
+            Blog | {{ $pageTitle }}
         @else
-            Projet_stage | @yield('title')
+            Blog | @yield('title')
         @endif
     </title>
     <!-- Swal Alert -->
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
     <!-- Website logo -->
-    <link rel="blog_icon" sizes="180x180" href="{{ asset(\App\Models\Setting::get()->first()->blog_logo) }}">
-    <link rel="shortcut icon" href="{{ asset(\App\Models\Setting::get()->first()->blog_logo) }}">
-    <link rel="manifest" href="{{ asset(\App\Models\Setting::get()->first()->blog_logo) }}">
+    <link rel="blog_icon" sizes="180x180" href="{{ asset(blogInfo()->blog_logo) }}">
+    <link rel="shortcut icon" href="{{ asset(blogInfo()->blog_logo) }}">
+    <link rel="manifest" href="{{ asset(blogInfo()->blog_logo) }}">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ asset('assets/admin/plugins/fontawesome-free/css/all.min.css') }}">
     <!-- Ionicons -->
@@ -29,6 +29,9 @@
     <!-- Styles -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="stylesheet" href="{{ asset('assets/ui-kit/css/mdb.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('jquery-ui-1.13.2/jquery-ui.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('jquery-ui-1.13.2/jquery-ui.structure.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('jquery-ui-1.13.2/jquery-ui.theme.min.css') }}">
     @livewireStyles
 </head>
 
@@ -58,9 +61,10 @@
 </body>
 @livewireScripts
 <script src="{{ asset('assets/ui-kit/js/mdb.min.js') }}"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+{{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
 <!-- jQuery -->
 <script src="{{ asset('assets/admin/plugins/jquery/jquery.min.js') }}"></script>
+<script src="{{ asset('jquery-ui-1.13.2/jquery-ui.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('assets/admin/dist/js/adminlte.min.js') }}"></script>
 <script src="{{ asset('assets/admin/dist/js/adminlte.js') }}"></script>
@@ -70,4 +74,5 @@
 </script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
 @stack('scripts')
+
 </html>

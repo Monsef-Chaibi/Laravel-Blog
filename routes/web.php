@@ -12,6 +12,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\UserVerifyController;
+use App\Http\Controllers\Frontend\LayoutsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,6 +34,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['middleware' => ['guest']], function () {
+    Route::get('/home', [LayoutsController::class, "index"])->name('frontend-layouts');
     /**
      * Register Routes
      */
@@ -71,13 +73,13 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/settings', [GeneralSettingsController::class, 'index'])->name("settings");
         Route::post('/settings', [GeneralSettingsController::class, 'update'])->name("settings.update");
         Route::post('/settings/logo', [GeneralSettingsController::class, 'changeBlogLogo'])->name("change-blog-logo");
-        Route::view('/authors', 'layouts.partials.frontend.pages.authors')->name('authors');
-        Route::view('/categories', 'layouts.partials.frontend.pages.categories')->name('categories');
+        Route::view('/authors', 'layouts.partials.admin.pages.authors')->name('authors');
+        Route::view('/categories', 'layouts.partials.admin.pages.categories')->name('categories');
 
         Route::prefix('posts')->name('posts.')->group(function () {
             Route::get('/add-post', [PostController::class, 'index'])->name('add-post');
             Route::post('/create', [PostController::class, 'createPost'])->name('create');
-            Route::view('/all', 'layouts.partials.frontend.pages.all_posts')->name('all_posts');
+            Route::view('/all', 'layouts.partials.admin.pages.all_posts')->name('all_posts');
             Route::get('/edit-post', [PostController::class, 'editPost'])->name('edit-post');
             Route::post('/update-post', [PostController::class, 'updatePost'])->name('update-post');
             Route::put('/delete-post', [PostController::class, 'destroyPost'])->name('delete-post');

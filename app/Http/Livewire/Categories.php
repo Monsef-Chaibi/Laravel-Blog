@@ -12,7 +12,9 @@ class Categories extends Component
 {
     protected $listeners = [
         "deleteCategoryAction",
-        "deleteSubCategoryAction"
+        "deleteSubCategoryAction",
+        "updateCategoryOrdering",
+        "updateSubCategoryOrdering"
     ];
 
     public $category_name;
@@ -20,7 +22,7 @@ class Categories extends Component
     public $updateCategoryMode = false;
 
     public $subcategory_name;
-    public $parent_category;
+    public $parent_category = 0;
     public $selected_subcategory_id;
     public $updateSubCategoryMode = false;
 
@@ -187,11 +189,35 @@ class Categories extends Component
         }
     }
 
+    public function updateCategoryOrdering($positions)
+    {
+        foreach ($positions as $position) {
+            $index = $position[0];
+            $newPosition = $position[1];
+            Category::where('id', $index)->update([
+                'ordering' => $newPosition
+            ]);
+        }
+        toastr()->success('Categories ordering have been successfully updated.');
+    }
+
+    public function updateSubCategoryOrdering($positions)
+    {
+        foreach ($positions as $position) {
+            $index = $position[0];
+            $newPosition = $position[1];
+            SubCategory::where('id', $index)->update([
+                'ordering' => $newPosition
+            ]);
+        }
+        toastr()->success('SubCategories ordering have been successfully updated.');
+    }
+
     public function render()
     {
         return view('livewire.categories', [
-            "categories" => Category::orderBy('ordering', "ASC")->get(),
-            "subcategories" => SubCategory::orderBy('ordering', "ASC")->get()
+            "categories" => Category::orderby('ordering', "ASC")->get(),
+            "subcategories" => SubCategory::orderby('ordering', "ASC")->get()
         ]);
     }
 }

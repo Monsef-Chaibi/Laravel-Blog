@@ -22,28 +22,28 @@
                     <a class="nav-link" href="#">Team</a>
                 </li>
                 <!-- Navbar dropdown -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                        aria-expanded="false">
-                        Posts
-                    </a>
-                    <!-- Dropdown menu -->
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li>
-                            <a class="dropdown-item" href="{{ route('author.posts.add-post') }}">Add new Post</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="{{ route('author.posts.all_posts') }}">All Posts</a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider" />
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </li>
-                    </ul>
-                </li>
                 @if (Auth::check() && Auth::user()->role == 'admin')
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            aria-expanded="false">
+                            Posts
+                        </a>
+                        <!-- Dropdown menu -->
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li>
+                                <a class="dropdown-item" href="{{ route('author.posts.add-post') }}">Add new Post</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ route('author.posts.all_posts') }}">All Posts</a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider" />
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </li>
+                        </ul>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('author.categories') }}">Menus & Categories</a>
                     </li>
