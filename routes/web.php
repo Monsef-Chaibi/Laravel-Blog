@@ -12,6 +12,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\UserVerifyController;
+use App\Http\Controllers\Frontend\BlogController;
 use App\Http\Controllers\Frontend\LayoutsController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,20 +34,27 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 */
 
-Route::group(['middleware' => ['guest']], function () {
-    Route::get('/home', [LayoutsController::class, "index"])->name('frontend-layouts');
-    /**
-     * Register Routes
-     */
-    Route::get('/register', [RegisterController::class, 'show'])->name('register.show');
-    Route::post('/register', [RegisterController::class, 'register'])->name('register.perform');
 
-    /**
-     * Login Routes
-     */
-    Route::get('/login', [LoginController::class, 'show'])->name('login');
-    Route::post('/login', [LoginController::class, 'login'])->name('login.perform');
+
+Route::controller(LayoutsController::class)->group(function () {
+    Route::get('/home', 'index')->name('home');
+    Route::get('/article/{any}', 'readPost')->name('read_post');
+    Route::get('/category/{any}', 'categoryPosts')->name('category_posts');
+    Route::get('/posts/tag/{any}', 'tagPosts')->name('tag_posts');
+    Route::get('/search', 'searchPosts')->name('search_posts');
 });
+
+/**
+ * Register Routes
+ */
+Route::get('/register', [RegisterController::class, 'show'])->name('register.show');
+Route::post('/register', [RegisterController::class, 'register'])->name('register.perform');
+
+/**
+ * Login Routes
+ */
+Route::get('/login', [LoginController::class, 'show'])->name('login');
+Route::post('/login', [LoginController::class, 'login'])->name('login.perform');
 
 /**
  * Reset Password Routes
@@ -61,7 +69,7 @@ Route::get('account/verify/{token}', [UserVerifyController::class, 'verifyAccoun
  * Verified User Routes
  */
 Route::middleware(['auth'])->group(function () {
-    Route::get('/', [HomeController::class, 'index'])->name('home');
+    Route::get('/', [HomeController::class, 'index']);
     /**
      * Logout Routes
      */

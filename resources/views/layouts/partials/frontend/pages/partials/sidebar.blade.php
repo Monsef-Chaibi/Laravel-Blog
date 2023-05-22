@@ -11,23 +11,24 @@
     <!-- categories -->
     <div class="widget">
         <h5 class="widget-title"><span>Categories</span></h5>
-        <ul class="list-unstyled widget-list">
-            <li><a href="#!" class="d-flex">Four seasone
-                    <small class="ml-auto">(1)</small></a>
-            </li>
-            <li><a href="#!" class="d-flex">Newyork city
-                    <small class="ml-auto">(2)</small></a>
-            </li>
-            <li><a href="#!" class="d-flex">Photobooth
-                    <small class="ml-auto">(1)</small></a>
-            </li>
-            <li><a href="#!" class="d-flex">Photography
-                    <small class="ml-auto">(2)</small></a>
-            </li>
-            <li><a href="#!" class="d-flex">Videography
-                    <small class="ml-auto">(1)</small></a>
-            </li>
-        </ul>
+        @if (categories())
+            @foreach (categories() as $category)
+                <ul class="list-unstyled widget-list">
+                    <li>
+                        <a href="{{ route('category_posts', $category->slug) }}" class="d-flex">
+                            {{ Str::ucfirst($category->subcategory_name) }}
+                            <small class="ml-auto">({{$category->posts->count()}})</small>
+                        </a>
+                    </li>
+                </ul>
+            @endforeach
+        @else
+            <ul class="list-unstyled widget-list">
+                <li>
+                    <a href="#!" class="d-flex">There No Categories..!</a>
+                </li>
+            </ul>
+        @endif
     </div>
     <!-- tags -->
     <div class="widget">
@@ -51,46 +52,55 @@
     </div>
     <!-- latest post -->
     <div class="widget">
-        <h5 class="widget-title"><span>Latest Article</span></h5>
+        <h5 class="widget-title"><span>Latest Articles</span></h5>
         <!-- post-item -->
-        <ul class="list-unstyled widget-list">
-            <li class="media widget-post align-items-center">
-                <a href="post-elements.html">
-                    <img loading="lazy" class="mr-3" src="images/post/post-6.jpg">
-                </a>
-                <div class="media-body">
-                    <h5 class="h6 mb-0"><a href="post-elements.html">Elements That You Can Use To
-                            Create A New Post On
-                            This Template.</a></h5>
-                    <small>March 15, 2020</small>
-                </div>
-            </li>
-        </ul>
-        <ul class="list-unstyled widget-list">
-            <li class="media widget-post align-items-center">
-                <a href="post-details-1.html">
-                    <img loading="lazy" class="mr-3" src="images/post/post-1.jpg">
-                </a>
-                <div class="media-body">
-                    <h5 class="h6 mb-0"><a href="post-details-1.html">Cheerful Loving Couple Bakers
-                            Drinking Coffee</a>
-                    </h5>
-                    <small>March 14, 2020</small>
-                </div>
-            </li>
-        </ul>
-        <ul class="list-unstyled widget-list">
-            <li class="media widget-post align-items-center">
-                <a href="post-details-2.html">
-                    <img loading="lazy" class="mr-3" src="images/post/post-2.jpg">
-                </a>
-                <div class="media-body">
-                    <h5 class="h6 mb-0"><a href="post-details-2.html">Cheerful Loving Couple Bakers
-                            Drinking Coffee</a>
-                    </h5>
-                    <small>March 14, 2020</small>
-                </div>
-            </li>
-        </ul>
+        @if (latest_posts())
+            @foreach (latest_posts() as $latest_posts)
+                <ul class="list-unstyled widget-list">
+                    <li class="media widget-post align-items-center">
+                        <a href="{{ route('read_post', $latest_posts->post_slug) }}">
+                            <img loading="lazy" class="mr-3"
+                                src="{{ asset('storage/uploads/posts/thumbnails/thumb_' . $latest_posts->featured_image) }}"
+                                alt="Post Thumbnail">
+                        </a>
+                        <div class="media-body">
+                            <h5 class="h6 mb-0">
+                                <a href="{{ route('read_post', $latest_posts->post_slug) }}">
+                                    {{ $latest_posts->post_title }}
+                                </a>
+                            </h5>
+                            <small>{{ date_formatter($latest_posts->created_at) }}</small>
+                        </div>
+                    </li>
+                </ul>
+            @endforeach
+        @endif
+    </div>
+    <!-- Recommended posts -->
+    <div class="widget">
+        <h5 class="widget-title"><span>Recommended</span></h5>
+        <!-- post-item -->
+        @if (recommended_posts())
+            @foreach (recommended_posts() as $recommended_posts)
+                <ul class="list-unstyled widget-list">
+                    <li class="media widget-post align-items-center">
+                        <a href="{{ route('read_post', $recommended_posts->post_slug) }}">
+                            <img loading="lazy" class="mr-3"
+                                src="{{ asset('storage/uploads/posts/thumbnails/thumb_' . $recommended_posts->featured_image) }}"
+                                alt="Post Thumbnail">
+                        </a>
+                        <div class="media-body">
+                            <h5 class="h6 mb-0">
+                                <a href="{{ route('read_post', $recommended_posts->post_slug) }}">
+                                    {{ $recommended_posts->post_title }}
+                                </a>
+                            </h5>
+                            <p class="post_content mb-0">{!! Str::ucfirst(words($recommended_posts->post_content, 7)) !!}</p>
+                            <small>{{ date_formatter($recommended_posts->created_at) }}</small>
+                        </div>
+                    </li>
+                </ul>
+            @endforeach
+        @endif
     </div>
 </aside>

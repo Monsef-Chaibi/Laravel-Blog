@@ -152,3 +152,7 @@ h4 {
 .search-input {
     padding-right: 1rem !important;
 }
+
+table tbody tr {
+    cursor: grab;
+}

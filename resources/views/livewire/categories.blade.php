@@ -248,7 +248,7 @@
                 allowOutsideClick: false
             }).then(function(result) {
                 if (result.value) {
-                    window.livewire.emit('deleteCategoryAction', event.detail.id)
+                    window.livewire.emit('deleteSubCategoryAction', event.detail.id)
                 }
             })
         });

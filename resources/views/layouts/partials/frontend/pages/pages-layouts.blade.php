@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>
-        @if (url()->current() == 'http://localhost:8000')
+        @if (url()->current() == 'http://localhost:8000/home')
             Blog | {{ $pageTitle }}
         @else
             Blog | @yield('title')

@@ -32,4 +32,23 @@ class Post extends Model
         });
     }
 
+    /**
+     * Get the subcategory that owns the Post
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function subcategory()
+    {
+        return $this->belongsTo(SubCategory::class, 'category_id', 'id');
+    }
+
+    /**
+     * Get the author that owns the Post
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function author()
+    {
+        return $this->belongsTo(User::class, 'author_id', 'id');
+    }
 }

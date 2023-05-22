@@ -59,7 +59,7 @@ class Categories extends Component
     {
         if ($this->selected_category_id) {
             $this->validate([
-                "category_name" => 'required|unique:categories,category_name,'.$this->selected_category_id
+                "category_name" => 'required|unique:categories,category_name,' . $this->selected_category_id
             ]);
             $category = Category::findOrFail($this->selected_category_id);
             $category->category_name = $this->category_name;
@@ -122,7 +122,7 @@ class Categories extends Component
     {
         if ($this->selected_subcategory_id) {
             $this->validate([
-                "subcategory_name" => 'required|unique:sub_categories,subcategory_name,'.$this->selected_subcategory_id
+                "subcategory_name" => 'required|unique:sub_categories,subcategory_name,' . $this->selected_subcategory_id
             ]);
             $subcategory = SubCategory::findOrFail($this->selected_subcategory_id);
             $subcategory->subcategory_name = $this->subcategory_name;
@@ -144,22 +144,22 @@ class Categories extends Component
     {
         $category = Category::find($id);
         $this->dispatchBrowserEvent("deleteCategory", [
-            'title'=> 'Are you sure?',
-            'html'=> 'You want to delete <b>'.$category->category_name.'</b> category.',
-            'id'=> $id,
+            'title' => 'Are you sure?',
+            'html' => 'You want to delete <b>' . $category->category_name . '</b> category.',
+            'id' => $id,
         ]);
     }
 
     public function deleteCategoryAction($id)
     {
-        $category = Category::find($id)->first();
+        $category = Category::where('id', $id)->first();
         $subcategories = SubCategory::where('parent_category', $category->id)->whereHas('posts')->with('posts')->get();
         if (!empty($subcategories) && count($subcategories) > 0) {
             $totalPosts = 0;
             foreach ($subcategories as $subcategory) {
                 $totalPosts += Post::where('category_id', $subcategory->id)->get()->count();
             }
-            toastr()->warning('This category has ('.$totalPosts.') posts related to it, cannot be deleted.');
+            toastr()->warning('This category has (' . $totalPosts . ') posts related to it, cannot be deleted.');
         } else {
             SubCategory::where('parent_category', $category->id)->delete();
             $category->delete();
@@ -171,18 +171,18 @@ class Categories extends Component
     {
         $subcategory = SubCategory::find($id);
         $this->dispatchBrowserEvent("deleteSubCategory", [
-            'title'=> 'Are you sure?',
-            'html'=> 'You want to delete <b>'.$subcategory->category_name.'</b> category.',
-            'id'=> $id,
+            'title' => 'Are you sure?',
+            'html' => 'You want to delete <b>' . $subcategory->category_name . '</b> category.',
+            'id' => $id,
         ]);
     }
 
     public function deleteSubCategoryAction($id)
     {
-        $subcategory = SubCategory::find($id)->first();
+        $subcategory = SubCategory::where('id', $id)->first();
         $posts = Post::where('category_id', $subcategory->id)->get()->toArray();
         if (!empty($posts) && count($posts) > 0) {
-            toastr()->warning('This subcategory has ('.count($posts).') posts related to it, cannot be deleted.');
+            toastr()->warning('This subcategory has (' . count($posts) . ') posts related to it, cannot be deleted.');
         } else {
             $subcategory->delete();
             toastr()->info('SubCategory has been successfully deleted.');
