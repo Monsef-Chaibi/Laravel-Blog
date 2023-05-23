@@ -424,13 +424,13 @@ a:hover {
 
 .search-close {
   position: absolute;
-  right: 5px;
+  right: 2px;
   top: 50%;
   transform: translateY(-50%);
   border: 0;
-  background: transparent;
+  background: white;
   page-break-after: 10px;
-  font-size: 20px;
+  font-size: 25px;
 }
 
 .post-title {

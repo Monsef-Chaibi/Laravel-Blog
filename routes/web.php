@@ -41,7 +41,7 @@ Route::controller(LayoutsController::class)->group(function () {
     Route::get('/article/{any}', 'readPost')->name('read_post');
     Route::get('/category/{any}', 'categoryPosts')->name('category_posts');
     Route::get('/posts/tag/{any}', 'tagPosts')->name('tag_posts');
-    Route::get('/search', 'searchPosts')->name('search_posts');
+    Route::get('/search', 'searchBlog')->name('search_posts');
 });
 
 /**

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Welcome to Blog')
+@section('title', isset($pageTitle) ? $pageTitle : 'Welcome to Blog')
 
 @section('content')
     <div class="row">

@@ -32,12 +32,40 @@ class LayoutsController extends Controller
                     ->orderBy('created_at', 'DESC')
                     ->paginate(6);
                 $data = [
-                    'pageTitle' => 'Category - '. $subcategory->subcategory_name,
+                    'pageTitle' => 'Category - ' . $subcategory->subcategory_name,
                     'category' => $subcategory,
                     'posts' => $posts,
                 ];
                 return view('layouts.partials.frontend.pages.inc.category_posts', $data);
             }
+        }
+    }
+
+    public function searchBlog(Request $request)
+    {
+        $query = request()->query('query');
+        if ($query && strlen($query) >= 2) {
+            $searchValues = preg_split('/\s+/', $query, -1, PREG_SPLIT_NO_EMPTY);
+            $posts = Post::query();
+
+            $posts->where(function ($query) use ($searchValues) {
+                foreach ($searchValues as $value) {
+                    $query->orWhere('post_title', 'LIKE', "%{$value}%");
+                    $query->orWhere('post_tags', 'LIKE', "%{$value}%");
+                }
+            });
+            $posts = $posts->with('subcategory')
+                            ->with('author')
+                            ->orderBy('created_at', 'DESC')
+                            ->paginate(6);
+            $data = [
+                'pageTitle' => 'Search for -> '.request()->query('query'),
+                'posts' => $posts
+            ];
+
+            return view('layouts.partials.frontend.pages.inc.search_posts', $data);
+        } else {
+            toastr()->warning('You need to complete the sentence');
         }
     }
 }
