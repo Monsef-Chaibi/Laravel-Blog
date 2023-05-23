@@ -14,22 +14,7 @@
     <!-- mobile responsive meta -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
     <!-- Meta Tags -->
-    <meta name="robots" content="index,follow" />
-    <meta name="title" content="{{ blogInfo()->blog_name }}" />
-    <meta name="description" content="{{ blogInfo()->blog_description }}" />
-    <meta name="author" content="{{ blogInfo()->blog_name }}" />
-    <link rel="canonical" href="{{ Request::root() }}" />
-    <meta property="og:title" content="{{ blogInfo()->blog_name }}" />
-    <meta property="og:type" content="website" />
-    <meta property="og:description" content="{{ blogInfo()->blog_description }}" />
-    <meta property="og:url" content="{{ Request::root() }}" />
-    <meta property="og:image" content="{{ blogInfo()->blog_logo }}" />
-    <meta name="twitter:domain" content="{{ Request::root() }}" />
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" property="og:title" itemprop="name" content="{{ blogInfo()->blog_name }}" />
-    <meta name="twitter:description" property="og:description" itemprop="description"
-        content="{{ blogInfo()->blog_description }}" />
-    <meta name="twitter:image" content="{{ blogInfo()->blog_logo }}" />
+    @yield('meta_tags')
 
     <!-- plugins -->
     <link rel="preload" href="https://fonts.gstatic.com/s/opensans/v18/mem8YaGs126MiZpBA-UFWJ0bbck.woff2"

@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Post;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class LayoutsController extends Controller
 {
@@ -55,17 +56,46 @@ class LayoutsController extends Controller
                 }
             });
             $posts = $posts->with('subcategory')
-                            ->with('author')
-                            ->orderBy('created_at', 'DESC')
-                            ->paginate(6);
+                ->with('author')
+                ->orderBy('created_at', 'DESC')
+                ->paginate(6);
             $data = [
-                'pageTitle' => 'Search for -> '.request()->query('query'),
+                'pageTitle' => 'Search for -> ' . request()->query('query'),
                 'posts' => $posts
             ];
 
             return view('layouts.partials.frontend.pages.inc.search_posts', $data);
         } else {
             toastr()->warning('You need to complete the sentence');
+        }
+    }
+
+    public function ReadPost($slug)
+    {
+        if (!$slug) {
+            return abort(404);
+        } else {
+            $post = Post::where('post_slug', $slug)
+                ->with('subcategory')
+                ->with('author')
+                ->first();
+            $post_tags = explode(',', $post->post_tags);
+            $related_posts = Post::where('id', '!=', $post->id)
+                ->where(function ($query) use ($post_tags, $post) {
+                    foreach ($post_tags as $item) {
+                        $query->orWhere('post_tags', 'LIKE', "%$item%")
+                            ->orWhere('post_title', 'LIKE', $post->post_title);
+                    }
+                })->inRandomOrder()
+                ->take(3)
+                ->get();;
+            $data = [
+                'pageTitle' => Str::ucfirst($post->post_title),
+                'post' => $post,
+                'related_posts' => $related_posts,
+            ];
+
+            return view('layouts.partials.frontend.pages.inc.single_post', $data);
         }
     }
 }

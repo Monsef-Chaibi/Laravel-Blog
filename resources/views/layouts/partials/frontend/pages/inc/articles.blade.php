@@ -2,6 +2,25 @@
 
 @section('title', isset($pageTitle) ? $pageTitle : 'Welcome to Blog')
 
+@section('meta_tags')
+    <meta name="robots" content="index,follow" />
+    <meta name="title" content="{{ blogInfo()->blog_name }}" />
+    <meta name="description" content="{{ blogInfo()->blog_description }}" />
+    <meta name="author" content="{{ blogInfo()->blog_name }}" />
+    <link rel="canonical" href="{{ Request::root() }}" />
+    <meta property="og:title" content="{{ blogInfo()->blog_name }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="{{ blogInfo()->blog_description }}" />
+    <meta property="og:url" content="{{ Request::root() }}" />
+    <meta property="og:image" content="{{ blogInfo()->blog_logo }}" />
+    <meta name="twitter:domain" content="{{ Request::root() }}" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" property="og:title" itemprop="name" content="{{ blogInfo()->blog_name }}" />
+    <meta name="twitter:description" property="og:description" itemprop="description"
+        content="{{ blogInfo()->blog_description }}" />
+    <meta name="twitter:image" content="{{ blogInfo()->blog_logo }}" />
+@endsection
+
 @section('content')
     <div class="row">
         <div class="col-lg-8 mb-5 mb-lg-0">
@@ -37,13 +56,16 @@
                                 </li>
                                 <li class="list-inline-item">
                                     Categories : <a href="{{ route('category_posts', $latestPosts->subcategory->slug) }}"
-                                        class="ml-1">{{ $latestPosts->subcategory->parentCategory->category_name }}
+                                        class="ml-1">
+                                        {{ $latestPosts->subcategory->subcategory_name }}
                                     </a>
                                 </li>
-                                <li class="list-inline-item">
-                                    Tags :
-                                    <a href="#!" class="ml-1">{{ Str::ucfirst($latestPosts->post_tags) }}</a>
-                                </li>
+                                @if ($latestPosts->post_tags)
+                                    <li class="list-inline-item">
+                                        Tags :
+                                        <a href="#!" class="ml-1">{{ Str::ucfirst($latestPosts->post_tags) }}</a>
+                                    </li>
+                                @endif
                             </ul>
                             <p>{!! Str::ucfirst(words($latestPosts->post_content, 35)) !!}</p>
                             <a href="{{ route('read_post', $latestPosts->post_slug) }}"

@@ -44,11 +44,15 @@
                                         <li class="list-inline-item">Date : {{ date_formatter($post->created_at) }}</li>
                                         <li class="list-inline-item">Categories :
                                             <a href="{{ route('category_posts', $post->subcategory->slug) }}"
-                                                class="ml-1">{{ $post->subcategory->parentCategory->category_name }}</a>
+                                                class="ml-1">
+                                                {{ $post->subcategory->subcategory_name }}
+                                            </a>
                                         </li>
+                                        @if ($post->post_tags)
                                         <li class="list-inline-item">Tags :
                                             <a href="#!" class="ml-1">{{ Str::ucfirst($post->post_tags) }} </a>
                                         </li>
+                                        @endif
                                     </ul>
                                     <p>
                                         {!! Str::ucfirst(words($post->post_content, 25)) !!}
