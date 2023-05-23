@@ -3,7 +3,7 @@
         <div class="row justify-content-between">
             <div class="col-md-3 mb-4">
                 <a class="mb-4 d-block" href="index.html">
-                    <img class="img-fluid" width="60px" height="50px" style="max-width: 100px;" src="{{ blogInfo()->blog_logo }}" alt="{{ blogInfo()->blog_name }}">
+                    <img class="img-fluid" width="60px" height="50px" style="max-width: 100px;" src="{{ asset(blogInfo()->blog_logo) }}" alt="{{ blogInfo()->blog_name }}">
                 </a>
                 <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt
                     ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>

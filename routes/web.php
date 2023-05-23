@@ -37,7 +37,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::controller(LayoutsController::class)->group(function () {
-    Route::get('/home', 'index')->name('home');
+    Route::get('/', 'index')->name('home');
     Route::get('/article/{any}', 'readPost')->name('read_post');
     Route::get('/category/{any}', 'categoryPosts')->name('category_posts');
     Route::get('/posts/tag/{any}', 'tagPosts')->name('tag_posts');
@@ -69,7 +69,7 @@ Route::get('account/verify/{token}', [UserVerifyController::class, 'verifyAccoun
  * Verified User Routes
  */
 Route::middleware(['auth'])->group(function () {
-    Route::get('/', [HomeController::class, 'index']);
+    // Route::get('/', [HomeController::class, 'index']);
     /**
      * Logout Routes
      */

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Post;
+use App\Models\SubCategory;
 use Illuminate\Http\Request;
 
 class LayoutsController extends Controller
@@ -14,11 +16,28 @@ class LayoutsController extends Controller
         $categories = Category::whereHas('subcategories', function ($query) {
             $query->whereHas('posts');
         })->orderby('ordering', 'ASC')->get();
-        return view('layouts.partials.frontend.pages.pages-layouts', compact('categories', "pageTitle"));
+        return view('layouts.partials.frontend.pages.inc.articles', compact('categories', "pageTitle"));
     }
 
-    public function readPost()
+    public function categoryPosts(Request $request, $slug)
     {
-        return view('layouts.partials.frontend.pages.inc.content-wrapper');
+        if (!$slug) {
+            return abort(404);
+        } else {
+            $subcategory = SubCategory::where('slug', $slug)->first();
+            if (!$subcategory) {
+                return abort(404);
+            } else {
+                $posts = Post::where('category_id', $subcategory->id)
+                    ->orderBy('created_at', 'DESC')
+                    ->paginate(6);
+                $data = [
+                    'pageTitle' => 'Category - '. $subcategory->subcategory_name,
+                    'category' => $subcategory,
+                    'posts' => $posts,
+                ];
+                return view('layouts.partials.frontend.pages.inc.category_posts', $data);
+            }
+        }
     }
 }

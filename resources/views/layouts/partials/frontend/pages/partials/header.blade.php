@@ -18,8 +18,8 @@
                             Categories <i class="ti-angle-down ml-1"></i>
                         </a>
                         <div class="dropdown-menu">
-                            @foreach ($categories as $category)
-                                <a class="dropdown-item" href="">{{ $category->category_name }}</a>
+                            @foreach (category() as $category)
+                                <a class="dropdown-item" href="{{ route('category_posts', $category->category_name) }}">{{ $category->category_name }}</a>
                             @endforeach
                         </div>
                     </li>
@@ -30,13 +30,13 @@
                         </a>
                         <div class="dropdown-menu">
                             @foreach (\App\Models\SubCategory::whereHas('posts')->orderby('ordering', "ASC")->get() as $subcategory)
-                                <a class="dropdown-item" href="">{{ $subcategory->subcategory_name }}</a>
+                                <a class="dropdown-item" href="{{ route('category_posts', $subcategory->slug) }}">{{ $subcategory->subcategory_name }}</a>
                             @endforeach
                         </div>
                     </li>
                     @foreach (\App\Models\SubCategory::where('parent_category', 0)->whereHas('posts')->orderby('ordering', 'ASC')->get() as $subcategory)
                         <li class="nav-item">
-                            <a class="nav-link" href="">{{ $subcategory->subcategory_name }}</a>
+                            <a class="nav-link" href="{{ route('category_posts', $subcategory->slug) }}">{{ $subcategory->subcategory_name }}</a>
                         </li>
                     @endforeach
                     <li class="nav-item">

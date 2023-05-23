@@ -176,13 +176,13 @@ a:hover {
 }
 
 .section {
-  padding-top: 50px;
-  padding-bottom: 100px;
+  padding-top: 25px;
+  padding-bottom: 50px;
 }
 
 .section-sm {
-  padding-top: 80px;
-  padding-bottom: 80px;
+  padding-top: 40px;
+  padding-bottom: 40px;
 }
 
 .bg-cover {
@@ -1086,4 +1086,153 @@ a:hover {
   display: block;
 }
 
-/*# sourceMappingURL=style.css.map */
+.post-title {
+  color: #000;
+  display: inline;
+  text-decoration: none;
+  background-image: linear-gradient(#3deaa4, #3deaa4);
+  background-position: 0% 80%;
+  background-repeat: no-repeat;
+  background-size: 0% 8px;
+  transition: background-size 0.3s;
+}
+.post-title-sm {
+  background-size: 0% 3px;
+}
+
+a.post-title:hover {
+  color: #000;
+  background-size: 100% 8px;
+}
+
+a.post-title-sm:hover {
+  background-size: 100% 3px;
+}
+
+.breadcrumbs {
+  background-color: transparent;
+  padding: 15px 0;
+}
+.breadcrumbs a {
+  color: #131313;
+}
+.breadcrumbs a:hover {
+  text-decoration: underline;
+}
+.breadcrumbs a:last-child {
+  color: rgba(19, 19, 19, 0.5);
+  pointer-events: none;
+}
+.border-primary {
+  border-color: #13AE6F !important;
+}
+/* widget */
+.widget-blocks {
+  padding-left: 20px;
+}
+@media (max-width: 991px) {
+  .widget-blocks {
+    padding-left: 0;
+  }
+}
+.widget-blocks .row > .col:last-child .widget-second, .widget-blocks .row > [class*=col-]:last-child .widget-second {
+  margin-bottom: 0 !important;
+}
+
+.widget-second {
+  margin-bottom: 50px;
+}
+.widget-second-body {
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 0;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.05);
+}
+@media (max-width: 1200px) {
+  .widget-body-sm {
+    padding: 20px;
+  }
+}
+@media (max-width: 991px) {
+  .widget-second-body {
+    padding: 25px;
+  }
+}
+@media (max-width: 575px) {
+  .widget-second-body {
+    padding: 15px;
+  }
+}
+.widget-second-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.widget-second-list .card {
+  border-bottom: 1px dashed #ececec;
+  padding-bottom: 15px;
+}
+.widget-second-list .media img {
+  height: 80px;
+  width: 80px !important;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 0;
+}
+.widget-second-list .media:not(:last-child) {
+  border-bottom: 1px dashed #ececec;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+}
+.widget-second-list .media:hover {
+  opacity: 0.8;
+}
+.widget-second-list li {
+  display: inline-block;
+}
+.widget-second-list li a {
+  background-color: rgba(19, 19, 19, 0.05);
+  color: black;
+  text-transform: capitalize;
+  padding: 6px 16px;
+  margin-bottom: 9px;
+  margin-right: 9px;
+  display: block;
+  font-size: 14px;
+  border-radius: 0;
+}
+.widget-second-list li a:hover {
+  background-color: rgba(61, 234, 164, 0.25);
+}
+
+.author-thumb-sm {
+  height: 150px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+@media (max-width: 991px) {
+  .author-thumb-sm {
+    height: 250px;
+  }
+}
+@media (max-width: 767px) {
+  .author-thumb-sm {
+    height: 200px;
+  }
+}
+
+.post-thumb-sm {
+  height: 80px;
+  width: 100px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 0;
+}
+
+.copyright {
+  background-color: #0e0e0e !important;
+  color: #e8e8e8;
+  padding: 20px 0;
+  font-size: 14px;
+  text-align: center;
+}

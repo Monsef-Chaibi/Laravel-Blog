@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.auth-master')
 
 @section('title', 'Add new post')
 

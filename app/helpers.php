@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Category;
 use App\Models\Post;
 use App\Models\Setting;
 use App\Models\SubCategory;
@@ -99,5 +100,14 @@ if (!function_exists('recommended_posts')) {
 if (!function_exists('categories')) {
     function categories() {
         return SubCategory::whereHas('posts')->with('posts')->orderBy('subcategory_name', 'ASC')->get();
+    }
+}
+
+/**
+ * PARENT CATEGORY 
+ */
+if (!function_exists('category')) {
+    function category() {
+        return Category::whereHas('subcategories')->orderBy('category_name', 'ASC')->get();
     }
 }
