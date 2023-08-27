@@ -1,4 +1,4 @@
-@extends('layouts.auth-master')
+@extends('layouts.admin')
 
 @section('title', 'profile')
 
@@ -13,7 +13,7 @@
                 </ul>
             </div>
         @endif
-        <form action="{{ route('author.profile.update') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admin.profile.update') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="row">
                 <div class="col-md-3 border-right">

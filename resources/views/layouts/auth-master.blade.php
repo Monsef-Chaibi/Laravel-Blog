@@ -48,11 +48,11 @@
         @include('layouts.partials.frontend.sidebar')
         <!-- SideBar -->
     </header>
-    @if (Session::has('message'))
+    {{-- @if (Session::has('message'))
         <div class="alert alert-success" role="alert">
             {{ Session::get('message') }}
         </div>
-    @endif
+    @endif --}}
 
     <!--Main Navigation-->
     <div class="container">

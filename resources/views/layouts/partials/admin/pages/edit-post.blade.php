@@ -25,14 +25,6 @@
                                         @enderror
                                     </div>
                                     <div class="mb-3">
-                                        <label class="form-label">Post Slug</label>
-                                        <input type="text" class="form-control" name="post_slug"
-                                            placeholder="Enter post slug..." value="{{ $post->post_slug }}" />
-                                        @error('post_slug')
-                                            <span class="text-danger fw-bold">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                    <div class="mb-3">
                                         <label class="form-label">Post Content</label>
                                         <textarea name="post_content" class="ckeditor form-control" id="post_content" placeholder="Content..." rows="6">{{ $post->post_content }}"</textarea>
                                         @error('post_content')

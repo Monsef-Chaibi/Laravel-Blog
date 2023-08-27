@@ -11,25 +11,24 @@
     <!-- categories -->
     @include('layouts.partials.frontend.pages.inc.categories_list')
     <!-- tags -->
-    <div class="widget">
-        <h5 class="widget-title"><span>Tags</span></h5>
-        <ul class="list-inline widget-list-inline">
-            <li class="list-inline-item"><a href="#!">Booth</a>
-            </li>
-            <li class="list-inline-item"><a href="#!">City</a>
-            </li>
-            <li class="list-inline-item"><a href="#!">Image</a>
-            </li>
-            <li class="list-inline-item"><a href="#!">New</a>
-            </li>
-            <li class="list-inline-item"><a href="#!">Photo</a>
-            </li>
-            <li class="list-inline-item"><a href="#!">Seasone</a>
-            </li>
-            <li class="list-inline-item"><a href="#!">Video</a>
-            </li>
-        </ul>
-    </div>
+    @if (tags_posts())
+        <div class="widget">
+            <h5 class="widget-title"><span>Tags</span></h5>
+            <ul class="list-inline widget-list-inline">
+                @php
+                    $postTagsString = tags_posts();
+                    $tagsArray = array_unique(explode(',', $postTagsString));
+                    sort($tagsArray)
+                @endphp
+                @foreach ($tagsArray as $tag)
+                    <li class="list-inline-item">
+                        <a href="{{ route('tag_posts', $tag) }}" class="tags">#{{ $tag }}</a>
+                    </li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     <!-- latest post -->
     <div class="widget">
         <h5 class="widget-title"><span>Latest Articles</span></h5>

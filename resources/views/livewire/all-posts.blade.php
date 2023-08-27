@@ -58,7 +58,7 @@
                         class="card-img-top" alt="{{ $post->featured_image }}">
                     <div class="card-body">
                         <h5 class="card-title fw-600 mb-2">{{ $post->post_title }}</h5>
-                        <p class="card-text fw-400 mb-2">{{ strip_tags(html_entity_decode($post->post_content)) }}</p>
+                        <p class="card-text fw-400 mb-2">{{ strip_tags(html_entity_decode(words($post->post_content, 25))) }}</p>
                         <a href="{{ route('author.posts.edit-post', ['post_id' => $post->id]) }}"
                             class="btn btn-info">Edit</a>
                         <form action="{{ route('author.posts.delete-post', ['post_id' => $post->id]) }}"

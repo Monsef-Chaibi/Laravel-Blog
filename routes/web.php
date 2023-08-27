@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Auth\Author\AuthorController;
+use App\Http\Controllers\Auth\Author\CommentController;
 use App\Http\Controllers\Auth\Author\GeneralSettingsController;
 use App\Http\Controllers\Auth\Author\PostController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
@@ -12,8 +13,8 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\UserVerifyController;
-use App\Http\Controllers\Frontend\BlogController;
 use App\Http\Controllers\Frontend\LayoutsController;
+use App\Http\Livewire\Bookmark;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,7 +36,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-
 Route::controller(LayoutsController::class)->group(function () {
     Route::get('/', 'index')->name('home');
     Route::get('/article/{any}', 'readPost')->name('read_post');
@@ -44,17 +44,22 @@ Route::controller(LayoutsController::class)->group(function () {
     Route::get('/search', 'searchBlog')->name('search_posts');
 });
 
-/**
- * Register Routes
- */
-Route::get('/register', [RegisterController::class, 'show'])->name('register.show');
-Route::post('/register', [RegisterController::class, 'register'])->name('register.perform');
+Route::post('/article/comment/{post}', [CommentController::class, 'postComment'])->name('post.comment');
+Route::post('/article/reply/{comment}', [CommentController::class, 'postCommentReply'])->name('post.reply');
 
-/**
- * Login Routes
- */
-Route::get('/login', [LoginController::class, 'show'])->name('login');
-Route::post('/login', [LoginController::class, 'login'])->name('login.perform');
+Route::middleware(['guest'])->group(function () {
+    /**
+     * Register Routes
+     */
+    Route::get('/register', [RegisterController::class, 'show'])->name('register.show');
+    Route::post('/register', [RegisterController::class, 'register'])->name('register.perform');
+
+    /**
+     * Login Routes
+     */
+    Route::get('/login', [LoginController::class, 'show'])->name('login');
+    Route::post('/login', [LoginController::class, 'login'])->name('login.perform');
+});
 
 /**
  * Reset Password Routes
@@ -68,7 +73,7 @@ Route::get('account/verify/{token}', [UserVerifyController::class, 'verifyAccoun
 /**
  * Verified User Routes
  */
-Route::middleware(['auth'])->group(function () {
+Route::middleware('auth')->group(function () {
     // Route::get('/', [HomeController::class, 'index']);
     /**
      * Logout Routes
@@ -78,11 +83,6 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('author')->name('author.')->group(function () {
         Route::get('/profile', [AuthorController::class, "index"])->name("profile");
         Route::post('/profile', [AuthorController::class, "update"])->name("profile.update");
-        Route::get('/settings', [GeneralSettingsController::class, 'index'])->name("settings");
-        Route::post('/settings', [GeneralSettingsController::class, 'update'])->name("settings.update");
-        Route::post('/settings/logo', [GeneralSettingsController::class, 'changeBlogLogo'])->name("change-blog-logo");
-        Route::view('/authors', 'layouts.partials.admin.pages.authors')->name('authors');
-        Route::view('/categories', 'layouts.partials.admin.pages.categories')->name('categories');
 
         Route::prefix('posts')->name('posts.')->group(function () {
             Route::get('/add-post', [PostController::class, 'index'])->name('add-post');
@@ -91,10 +91,10 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/edit-post', [PostController::class, 'editPost'])->name('edit-post');
             Route::post('/update-post', [PostController::class, 'updatePost'])->name('update-post');
             Route::put('/delete-post', [PostController::class, 'destroyPost'])->name('delete-post');
+            Route::post('/bookmark', [PostController::class, 'saveArticle'])->name('bookmark-post');
         });
     });
 });
-
 
 /*
 |--------------------------------------------------------------------------
@@ -102,8 +102,13 @@ Route::middleware(['auth'])->group(function () {
 |--------------------------------------------------------------------------
 */
 
-Route::middleware(['auth'])->group(function () {
-    Route::prefix('admin')->name('admin.')->group(function () {
-        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    });
+Route::prefix('admin')->middleware(['auth', 'isAdmin'])->name('admin.')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/profile', [DashboardController::class, 'profile'])->name('profile');
+    Route::post('/profile', [DashboardController::class, 'update'])->name('profile.update');
+    Route::get('/settings', [GeneralSettingsController::class, 'index'])->name("settings");
+    Route::post('/settings', [GeneralSettingsController::class, 'update'])->name("settings.update");
+    Route::post('/settings/logo', [GeneralSettingsController::class, 'changeBlogLogo'])->name("change-blog-logo");
+    Route::view('/authors', 'layouts.partials.admin.pages.authors')->name('authors');
+    Route::view('/categories', 'layouts.partials.admin.pages.categories')->name('categories');
 });

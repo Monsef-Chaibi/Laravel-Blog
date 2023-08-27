@@ -45,10 +45,10 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('author.categories') }}">Menus & Categories</a>
+                        <a class="nav-link" href="{{ route('admin.categories') }}">Menus & Categories</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('author.authors') }}">Authors</a>
+                        <a class="nav-link" href="{{ route('admin.authors') }}">Authors</a>
                     </li>
                 @endif
             </ul>
@@ -105,14 +105,24 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
                         <li>
-                            <a class="dropdown-item" href="#" aria-disabled="true">{{ auth()->user()->username }}</a>
+                            <a class="dropdown-item" href="#" aria-disabled="true"
+                                aria-disabled="true">{{ auth()->user()->username }}</a>
                         </li>
-                        <li>
-                            <a class="dropdown-item" href="{{ route('author.profile') }}">My profile</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="{{ route('author.settings') }}">Settings</a>
-                        </li>
+
+                        @if (Auth::check() && Auth::user()->role == 'admin')
+                            <li>
+                                <a class="dropdown-item" href="{{ route('admin.profile') }}">My profile</a>
+                            </li>
+                        @else
+                            <li>
+                                <a class="dropdown-item" href="{{ route('author.profile') }}">My profile</a>
+                            </li>
+                        @endif
+                        @if (Auth::check() && Auth::user()->role == 'admin')
+                            <li>
+                                <a class="dropdown-item" href="{{ route('admin.settings') }}">Settings</a>
+                            </li>
+                        @endif
                         <li>
                             <hr class="dropdown-divider" />
                         </li>

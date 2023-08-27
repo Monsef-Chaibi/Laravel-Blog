@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -46,8 +47,9 @@ class ForgotPasswordController extends Controller
             $message->to($request->email);
             $message->subject('Reset Password');
         });
-
-        return back()->with('message', 'We have e-mailed your password reset link!');
+ 
+        toastr()->success('We have e-mailed your password reset link!');
+        return back();
     }
     /**
      * Write code on Method

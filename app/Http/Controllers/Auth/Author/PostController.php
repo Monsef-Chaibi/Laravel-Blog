@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth\Author;
 
 use App\Http\Controllers\Controller;
+use App\Models\Bookmark;
 use App\Models\Post;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
@@ -23,7 +24,6 @@ class PostController extends Controller
     {
         $request->validate([
             'post_title' => 'required|unique:posts,post_title',
-            'post_slug' => 'required|unique:posts,post_slug',
             'post_category' => 'required|exists:sub_categories,id',
             'post_content' => 'required',
             'featured_image' => 'required|mimes:jpeg,jpg,png,webp|max:2048',
@@ -57,7 +57,7 @@ class PostController extends Controller
                 $post->author_id = auth()->id();
                 $post->category_id = $request->post_category;
                 $post->post_title = $request->post_title;
-                $post->post_slug = Str::slug($request->post_slug);
+                $post->post_slug = Str::slug($request->post_title);
                 $post->post_content = $request->post_content;
                 $post->post_tags= $request->post_tags;
                 $post->featured_image = $new_filename;
@@ -96,7 +96,6 @@ class PostController extends Controller
         if ($request->hasFile('featured_image')) {
             $request->validate([
                 'post_title' => 'required|unique:posts,post_title,' . $request->post_id,
-                'post_slug' => 'required|unique:posts,post_slug,' . $request->post_id,
                 'post_category' => 'required|exists:sub_categories,id',
                 'post_content' => 'required',
                 'featured_image' => 'mimes:jpeg,jpg,png,webp|max:2048',
@@ -142,7 +141,7 @@ class PostController extends Controller
                 $post = Post::find($request->post_id);
                 $post->category_id = $request->post_category;
                 $post->post_title = $request->post_title;
-                $post->post_slug = $request->post_slug;
+                $post->post_slug = Str::slug($request->post_title);
                 $post->post_content = $request->post_content;
                 $post->post_tags= $request->post_tags;
                 $post->featured_image = $new_filename;
@@ -169,7 +168,6 @@ class PostController extends Controller
             $post = Post::find($request->post_id);
             $post->category_id = $request->post_category;
             $post->post_title = $request->post_title;
-            $post->post_slug = $request->post_slug;
             $post->post_content = $request->post_content;
             $post->post_tags= $request->post_tags;
             $saved = $post->save();
@@ -213,5 +211,22 @@ class PostController extends Controller
             toastr()->success('Error in deleting this post.');
             return redirect()->back();
         }
+    }
+
+    public function saveArticle(Request $request)
+    {
+        $bookmarked_post = Post::where('id', $request->post)->first();
+        if ($bookmarked_post) {
+            $bookmark = new Bookmark();
+            $bookmark->user_id = $bookmarked_post->author_id;
+            $bookmark->post_id = $bookmarked_post->id;
+            $bookmark->markable()->associate($bookmarked_post);
+            $saved = $bookmark->save();
+            if ($saved) {
+                toastr()->success('Post saved');
+            }
+            return response()->json(['status' => 'success']);
+        }
+        return response()->json(['status' => 'error']);
     }
 }

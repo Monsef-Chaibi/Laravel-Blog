@@ -1,4 +1,4 @@
-@extends('layouts.auth-master')
+@extends('layouts.app')
 
 @section('title', 'login')
 
@@ -75,3 +75,28 @@
         </div>
     </div>
 @endsection
+@push('stylesheets')
+    <style>
+        .btn-primary {
+            background: #3b71ca !important;
+            color: #fff;
+            border-color: #3b71ca !important;
+            border-radius: none !important;
+            box-shadow: 0 4px 9px -4px #3b71ca !important;
+        }
+
+        .btn {
+            border-radius: 0.25rem !important;
+        }
+
+        .btn-primary:active,
+        .btn-primary:hover,
+        .btn-primary.focus,
+        .btn-primary.active {
+            background: #386bc0 !important;
+            border-color: #386bc0 !important;
+            border-radius: none !important;
+            
+        }
+    </style>
+@endpush

@@ -62,8 +62,14 @@
                                 </li>
                                 @if ($latestPosts->post_tags)
                                     <li class="list-inline-item">
-                                        Tags :
-                                        <a href="#!" class="ml-1">{{ Str::ucfirst($latestPosts->post_tags) }}</a>
+                                        Tags <i class="ti-tag"></i> :
+                                        @php
+                                            $postTagsString = $latestPosts->post_tags;
+                                            $tagsArray = explode(',', $postTagsString);
+                                        @endphp
+                                        @foreach ($tagsArray as $tag)
+                                            <a href="{{ route('tag_posts', $tag) }}">#{{ $tag }}</a>
+                                        @endforeach
                                     </li>
                                 @endif
                             </ul>

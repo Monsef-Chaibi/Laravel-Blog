@@ -1,4 +1,4 @@
-@extends('layouts.auth-master')
+@extends('layouts.admin')
 
 @section('title', 'All Posts')
 

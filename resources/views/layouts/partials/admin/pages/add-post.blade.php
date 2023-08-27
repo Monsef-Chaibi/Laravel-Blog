@@ -1,4 +1,4 @@
-@extends('layouts.auth-master')
+@extends('layouts.admin')
 
 @section('title', 'Add new post')
 
@@ -20,14 +20,6 @@
                                         <input type="text" class="form-control" name="post_title"
                                             placeholder="Enter post name..." />
                                         @error('post_title')
-                                            <span class="text-danger fw-bold">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label">Post Slug</label>
-                                        <input type="text" class="form-control" name="post_slug"
-                                            placeholder="Enter post slug..." />
-                                        @error('post_slug')
                                             <span class="text-danger fw-bold">{{ $message }}</span>
                                         @enderror
                                     </div>

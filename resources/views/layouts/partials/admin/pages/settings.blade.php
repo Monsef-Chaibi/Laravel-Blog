@@ -1,4 +1,4 @@
-@extends('layouts.auth-master')
+@extends('layouts.admin')
 
 @section('title', 'settings')
 
@@ -31,7 +31,7 @@
                 <!-- Tabs content -->
                 <div class="tab-content" id="ex2-content">
                     <div class="tab-pane fade show active" id="ex2-tabs-1" role="tabpanel" aria-labelledby="ex2-tab-1">
-                        <form action={{ route('author.settings.update') }} method="POST">
+                        <form action={{ route('admin.settings.update') }} method="POST">
                             @csrf
                             <div class="row my-4">
                                 <div class="col-md-16">
@@ -76,7 +76,7 @@
                                         toastr()->error($message)
                                     @endphp
                                 @enderror
-                                <form action="{{ route('author.change-blog-logo') }}" method="POST"
+                                <form action="{{ route('admin.change-blog-logo') }}" method="POST"
                                     enctype="multipart/form-data">
                                     @csrf
                                     <div class="mb-2">

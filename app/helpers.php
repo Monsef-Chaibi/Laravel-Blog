@@ -7,6 +7,11 @@ use App\Models\SubCategory;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 
+/** PHP MAILER */
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 if (!function_exists('blogInfo')) {
     function blogInfo()
     {
@@ -98,7 +103,8 @@ if (!function_exists('recommended_posts')) {
  * CATEGORY WITH NUMBER OF POSTS
  */
 if (!function_exists('categories')) {
-    function categories() {
+    function categories()
+    {
         return SubCategory::whereHas('posts')->with('posts')->orderBy('subcategory_name', 'ASC')->get();
     }
 }
@@ -107,7 +113,74 @@ if (!function_exists('categories')) {
  * PARENT CATEGORY 
  */
 if (!function_exists('category')) {
-    function category() {
+    function category()
+    {
         return Category::whereHas('subcategories')->orderBy('category_name', 'ASC')->get();
+    }
+}
+
+/**
+ * SIDEBAR LATEST POSTS
+ */
+if (!function_exists('latest_sidebar_posts')) {
+    function latest_sidebar_posts($except = null, $limit = 4)
+    {
+        return Post::where('id', '!=', $except)
+            ->limit($limit)
+            ->orderBy('created_at', 'DESC')
+            ->get();
+    }
+}
+
+/** SEND EMAIL USING PHP MAILER */
+if (!function_exists('sendMail')) {
+    function sendMail($mailConfig)
+    {
+        require 'PHPMailer/src/Exception.php';
+        require 'PHPMailer/src/PHPMailer.php';
+        require 'PHPMailer/src/SMTP.php';
+
+        $mail = new PHPMailer(true);
+        $mail->SMTPDebug = 0;
+        $mail->isSMTP();
+        $mail->Host = env('EMAIL_HOST');
+        $mail->SMTPAuth = true;
+        $mail->Username = env('EMAIL_USERNAME');
+        $mail->Password = env('EMAIL_PASSWORD');
+        $mail->SMTPSecure = env('EMAIL_ENCRYPTION');
+        $mail->Port = env('EMAIL_PORT');
+        $email = "blog@gmail.com";
+        $mail->setFrom($email, $mailConfig['mail_from_name']);
+        $mail->addAddress($mailConfig['mail_recipient_email'], $mailConfig['mail_recipient_name']);
+        $mail->isHTML(true);
+        $mail->Subject = $mailConfig['mail_subject'];
+        $mail->Body = $mailConfig['mail_body'];
+
+        if ($mail->send()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
+/**
+ * ALL TAGS
+ */
+if (!function_exists('tags_posts')) {
+    function tags_posts()
+    {
+        return Post::where('post_tags', '!=', null)->distinct()->pluck('post_tags')->join(',');
+    }
+}
+
+/**
+ *  Display a date in the format of "X hours ago"
+ */
+if (!function_exists('formatTimeAgo')) {
+    function formatTimeAgo($date)
+    {
+        $timeAgo = Carbon::parse($date)->diffForHumans();
+        return $timeAgo;
     }
 }

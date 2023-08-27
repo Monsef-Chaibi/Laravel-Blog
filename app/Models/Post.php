@@ -51,4 +51,14 @@ class Post extends Model
     {
         return $this->belongsTo(User::class, 'author_id', 'id');
     }
+
+    /**
+     * Get all of the comments for the Post
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'post_id', 'id');
+    }
 }
