@@ -11,6 +11,12 @@ use Illuminate\Support\Facades\Hash;
 
 class DashboardController extends Controller
 {
+    public function index()
+
+    {
+        return view('layouts.partials.admin.pages.categories');
+
+    }
     public function profile()
     {
         return view('layouts.partials.admin.pages.profile');

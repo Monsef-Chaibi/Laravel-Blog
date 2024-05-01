@@ -37,9 +37,7 @@
     <!-- Swal Alert -->
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
     <!-- Website logo -->
-    <link rel="blog_icon" sizes="180x180" href="{{ asset(blogInfo()->blog_logo) }}">
-    <link rel="shortcut icon" href="{{ asset(blogInfo()->blog_logo) }}">
-    <link rel="manifest" href="{{ asset(blogInfo()->blog_logo) }}">
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ asset('assets/admin/plugins/fontawesome-free/css/all.min.css') }}">
     <!-- Ionicons -->

@@ -101,7 +101,6 @@ Route::middleware('auth')->group(function () {
 | Admin routes
 |--------------------------------------------------------------------------
 */
-
 Route::prefix('admin')->middleware(['auth', 'isAdmin'])->name('admin.')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/profile', [DashboardController::class, 'profile'])->name('profile');

@@ -2,10 +2,7 @@
     <div class="container">
 
         <nav class="navbar navbar-expand-lg navbar-white">
-            <a class="navbar-brand" href="{{ route('home') }}">
-                <img class="img-fluid" width="50px" height="40px" src="{{ asset(blogInfo()->blog_logo) }}"
-                    alt="{{ asset(blogInfo()->blog_name) }}">
-            </a>
+
             <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navigation">
                 <i class="ti-menu"></i>
             </button>
