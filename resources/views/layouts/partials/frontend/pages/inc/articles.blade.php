@@ -3,7 +3,7 @@
 @section('title', isset($pageTitle) ? $pageTitle : 'Welcome to Blog')
 
 @section('meta_tags')
- 
+
 @endsection
 
 @section('content')
@@ -12,7 +12,7 @@
             @if (latest_home_posts())
                 @foreach (latest_home_posts() as $latestPosts)
                     <article class="row mb-5 article">
-                        <div class="post-info">
+                        <div class="post-info"> 
                             <span class="text-uppercase">
                                 {{ readDuration($latestPosts->post_title, $latestPosts->post_content) }}
                                 @choice('min|mins', readDuration($latestPosts->post_title, $latestPosts->post_content)) read

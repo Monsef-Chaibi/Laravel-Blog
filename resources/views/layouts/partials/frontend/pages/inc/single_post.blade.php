@@ -354,7 +354,8 @@
 
 @push('stylesheets')
     <link rel="stylesheet" href="/share_buttons/jquery.floating-social-share.min.css" />
-    @vite(['resources/css/app.css'])
+    <link rel="stylesheet" href="{{asset('build/assets/app-1907674d.css')}}">
+    <script type="module" scr="{{asset('build/assets/app-0d91dc04.js')}}"></script>
 @endpush
 
 @push('scripts')

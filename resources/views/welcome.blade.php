@@ -11,7 +11,8 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
 
         <!-- Styles -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <link rel="stylesheet" href="{{asset('build/assets/app-1907674d.css')}}">
+        <script type="module" scr="{{asset('build/assets/app-0d91dc04.js')}}"></script>
     </head>
     <body>
             @if (Route::has('login'))
@@ -27,7 +28,7 @@
                     @endauth
                 </div>
             @endif
-        
+
         <div class="row">
             <div class="col-md-12">
                 <h1>Admin</h1>

@@ -19,7 +19,7 @@ if (!function_exists('blogInfo')) {
     }
 }
 
-/** 
+/**
  * Date Format eg: March 15, 2020
  */
 if (!function_exists('date_formatter')) {
@@ -54,7 +54,7 @@ if (!function_exists('isOnline')) {
 }
 
 /**
- * Reading article duration 
+ * Reading article duration
  */
 if (!function_exists('readDuration')) {
     function readDuration(...$text)
@@ -84,7 +84,7 @@ if (!function_exists('latest_posts')) {
 if (!function_exists('latest_home_posts')) {
     function latest_home_posts()
     {
-        return Post::with('author')->with('subcategory')->skip(4)->limit(7)->orderBy('created_at', 'DESC')->get();
+        return Post::with('author')->with('subcategory')->limit(8)->orderBy('created_at', 'DESC')->get();
     }
 }
 
@@ -110,7 +110,7 @@ if (!function_exists('categories')) {
 }
 
 /**
- * PARENT CATEGORY 
+ * PARENT CATEGORY
  */
 if (!function_exists('category')) {
     function category()
