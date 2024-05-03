@@ -3,11 +3,15 @@
 
         <nav class="navbar navbar-expand-lg navbar-white">
 
+            <a href="/">
+                <img class="img-fluid" width="100px" height="50px" style="max-width: 100px;" src="{{ asset(blogInfo()->blog_logo) }}" alt="{{ blogInfo()->blog_name }}">
+            </a>
             <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navigation">
                 <i class="ti-menu"></i>
             </button>
 
             <div class="collapse navbar-collapse text-center" id="navigation">
+
                 <ul class="navbar-nav ml-auto">
                     @if (Auth::check() && Auth::user()->role == 'admin')
                         <li class="new-item">
