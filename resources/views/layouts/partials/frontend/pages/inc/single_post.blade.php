@@ -55,7 +55,7 @@
                         @endif
                     </ul>
                 </div>
-                <div class="col-lg-10 mx-auto mb-4 bookmark-icon">
+                {{-- <div class="col-lg-10 mx-auto mb-4 bookmark-icon">
                     <form id="myForm" method="POST">
                         @csrf
                         <input type="hidden" value="{{ $post->id }}" id="postBookmark" />
@@ -73,7 +73,7 @@
                             <span>Bookmark</span>
                         </button>
                     </form>
-                </div>
+                </div> --}}
                 <div class="col-12 mb-3">
                     <div class="post-slider">
                         <img src="{{ asset('/storage/uploads/posts/' . $post->featured_image) }}" class="img-fluid"
@@ -354,7 +354,8 @@
 
 @push('stylesheets')
     <link rel="stylesheet" href="/share_buttons/jquery.floating-social-share.min.css" />
-    @vite(['resources/css/app.css'])
+    <link rel="stylesheet" href="{{asset('build/assets/app-1907674d.css')}}">
+    <script type="module" scr="{{asset('build/assets/app-0d91dc04.js')}}"></script>
 @endpush
 
 @push('scripts')

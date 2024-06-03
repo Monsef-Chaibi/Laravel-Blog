@@ -33,8 +33,7 @@
     <link rel="stylesheet" href="{{ asset('assets/ui-kit/css/mdb.min.css') }}">
     @stack('stylesheets')
     <!--Favicon-->
-    <link rel="shortcut icon" href="{{ asset(blogInfo()->blog_logo) }}" type="image/x-icon">
-    <link rel="icon" href="{{ asset(blogInfo()->blog_logo) }}" type="image/x-icon">
+    
 </head>
 
 <body>

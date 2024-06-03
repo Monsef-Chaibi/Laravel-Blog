@@ -14,7 +14,7 @@ class RegisterController extends Controller
 {
     /**
      * Display register page.
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function show()
@@ -24,9 +24,9 @@ class RegisterController extends Controller
 
     /**
      * Handle account registration request
-     * 
+     *
      * @param RegisterRequest $request
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function register(RegisterRequest $request)

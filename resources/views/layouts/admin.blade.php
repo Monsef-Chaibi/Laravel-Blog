@@ -33,13 +33,12 @@
     <link rel="stylesheet" href="{{ asset('assets/admin/plugins/summernote/summernote-bs4.min.css') }}">
 
     <!-- Styles -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link rel="stylesheet" href="{{asset('build/assets/app-1907674d.css')}}">
+    <script type="module" scr="{{asset('build/assets/app-0d91dc04.js')}}"></script>
     <!-- Swal Alert -->
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
     <!-- Website logo -->
-    <link rel="blog_icon" sizes="180x180" href="{{ asset(blogInfo()->blog_logo) }}">
-    <link rel="shortcut icon" href="{{ asset(blogInfo()->blog_logo) }}">
-    <link rel="manifest" href="{{ asset(blogInfo()->blog_logo) }}">
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ asset('assets/admin/plugins/fontawesome-free/css/all.min.css') }}">
     <!-- Ionicons -->
