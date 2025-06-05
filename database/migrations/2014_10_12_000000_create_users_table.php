@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('username')->unique();
             $table->text('bio')->nullable();
-            $table->string('picture')->default('uploads/profile/default_profile_picture.jpg');
+            $table->string('picture')->default('uploads/profile/default_profile_picture.png');
             $table->string('country')->nullable();
             $table->string('state')->nullable();
             $table->timestamp('join_date')->default(Carbon::now());

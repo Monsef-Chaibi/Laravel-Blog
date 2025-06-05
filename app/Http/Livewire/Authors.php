@@ -142,7 +142,7 @@ class Authors extends Component
     {
         $author = User::find($this->selected_author_id);
         if (File::exists($author->picture)) {
-            if (public_path($author->picture) != "C:\Users\EL MaaZouZi\OneDrive\Documents\projet_stage\public\uploads/profile/default_profile_picture.jpg") {
+            if (public_path($author->picture) != "") {
                 File::delete($author->picture);
             }
         }

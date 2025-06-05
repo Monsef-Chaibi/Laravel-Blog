@@ -36,7 +36,7 @@ class AuthorController extends Controller
         $uploadPath = 'uploads/profile/';
         if ($request->hasFile('picture')) {
             if (File::exists(Auth::user()->picture)) {
-                if (public_path(Auth::user()->picture) != "C:\Users\EL MaaZouZi\OneDrive\Documents\projet_stage\public\uploads/profile/default_profile_picture.jpg") {
+                if (public_path(Auth::user()->picture) != "") {
                     File::delete(Auth::user()->picture);
                 }
             }

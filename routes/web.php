@@ -35,6 +35,18 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 */
 
+Route::get('/testmail', function () {
+    $email = 'test@example.com';
+    $token = '123456';
+
+    Mail::send('layouts.partials.frontend.email.emailVerificationEmail', ['token' => $token], function ($message) use ($email) {
+        $message->to($email);
+        $message->subject('Test Email');
+    });
+
+    echo 'Email Sent!';
+});
+
 
 Route::controller(LayoutsController::class)->group(function () {
     Route::get('/', 'index')->name('home');
